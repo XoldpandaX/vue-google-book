@@ -1,0 +1,12 @@
+.app-rating {
+  display: flex;
+  align-items: center;
+}
+
+.stars-wrapper {
+  display: flex;
+
+  &:not(:last-child) {
+    margin-right: 2px;
+  }
+}
