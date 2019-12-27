@@ -1,40 +1,48 @@
-:root {
-  // ---------------- colors
-  // palette
-  --black: #000;
-  --white: #fff;
-  --light-ashen: #9B9B9B;
-  --ashen: #4B5959;
-  --light-gray: #F3F3F3;
-  --gray: #7D8888;
-  --dark-gray: #848E8E;
-  --deep-dark-gray: rgba(0, 0, 0, 0.700776);
-  --green: #417505;
+// ---------------- colors
+// palette
+$black: #000;
+$white: #fff;
+$light-ashen: #9B9B9B;
+$ashen: #4B5959;
+$light-gray: #F3F3F3;
+$gray: #7D8888;
+$dark-gray: #848E8E;
+$deep-dark-gray: rgba(0, 0, 0, 0.700776);
+$green: #417505;
 
-  // main colors
-  --primary-text: var(--black);
-  --secondary-text: var(--ashen);
-  --tertiary-text: var(--dark-gray);
-  --quaternary-text: var(--gray);
+// main colors
+$primary-text: $black;
+$secondary-text: $ashen;
+$tertiary-text: $dark-gray;
+$quaternary-text: $gray;
 
-  --primary-background: var(--white);
-  --secondary-background: var(--light-gray);
-  --tertiary-background: var(--dark-gray);
+$primary-background: $white;
+$secondary-background: $light-gray;
+$tertiary-background: $dark-gray;
 
-  // colors by use
-  --search-tooltip: var(--deep-dark-gray);
-  --additional-text: var(--green);
-  --input-placeholder: var(--light-ashen);
+// colors by use
+$search-tooltip: $deep-dark-gray;
+$additional-text: $green;
+$input-placeholder: $light-ashen;
+$input-border: $gray;
 
 
-  // ---------------- font sizes
-  // text
-  --primary-font-size: 0.9375rem; // 15px
-  --secondary-font-size: 0.8125rem; // 13px
-  --tertiary-font-size: 1.0625rem; // 17px
+// ---------------- fonts
+$primary-font: 'Roboto', Helvetica, Arial, sans-serif;
 
-  // titles
-  --h1-font-size: 1.3125rem; // 21px
-  --h2-font-size: 1.1875rem; // 19px
-  --h3-font-size: var(--tertiary-font-size);
-}
+
+// ---------------- font sizes
+// text
+$primary-font-size: 0.9375rem; // 15px
+$secondary-font-size: 0.8125rem; // 13px
+$tertiary-font-size: 1.0625rem; // 17px
+
+// titles
+$h1-font-size: 1.3125rem; // 21px
+$h2-font-size: 1.1875rem; // 19px
+$h3-font-size: $tertiary-font-size;
+
+
+// ---------------- different sizes
+$primary-border-radius: rem(4px);
+
