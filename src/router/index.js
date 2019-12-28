@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import { ROUTES } from '@/constants';
 
-import Home from '@/views/Home.vue';
+import { HomePage } from '@/components/routes/home/page';
 import About from '@/views/About.vue';
 
 Vue.use(VueRouter);
@@ -11,7 +11,7 @@ const routes = [
   {
     path: ROUTES.HOME.PATH,
     name: ROUTES.HOME.NAME,
-    component: Home,
+    component: HomePage,
   },
   {
     path: ROUTES.SEARCH.PATH,
