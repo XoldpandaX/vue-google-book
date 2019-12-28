@@ -25,11 +25,14 @@ export default {
   name: 'app-icon',
   props: {
     name: VueTypes.oneOf(Object.values(iconNames)).isRequired,
+    color: VueTypes.string.def('#4B5959'),
     size: VueTypes.shape({
       width: VueTypes.number,
       height: VueTypes.number,
-    }).isRequired,
-    color: VueTypes.string.def('#4B5959'),
+    }).def({
+      width: 20,
+      height: 20,
+    }),
   },
   computed: {
     isIconExist() {

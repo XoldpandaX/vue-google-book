@@ -1,4 +1,4 @@
-<template>
+<template functional>
   <path
     fill-rule="evenodd"
     clip-rule="evenodd"
