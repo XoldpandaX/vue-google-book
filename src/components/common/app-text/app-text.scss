@@ -1,0 +1,48 @@
+@import "~sass-rem/rem";
+@import 'src/assets/styles/base/variables';
+
+.app-text {
+  margin: 0;
+
+  &--size {
+    $text-font-sizes: (
+      primary: $primary-font-size,
+      secondary: $secondary-font-size,
+      tertiary: $tertiary-font-size
+    );
+
+    @each $className, $size in $text-font-sizes {
+      &-#{$className} {
+        font-size: $size;
+      }
+    }
+  }
+
+  &--color {
+    $text-colors: (
+      primary: $primary-text-color,
+      secondary: $secondary-text-color,
+      tertiary: $tertiary-text-color,
+      quaternary: $quaternary-text-color
+    );
+
+    @each $className, $color in $text-colors {
+      &-#{$className} {
+        color: $color;
+      }
+    }
+  }
+
+  &--line-height {
+    $text-line-heights: (
+      primary: $primary-font-line-height,
+      secondary: $secondary-font-line-height
+    );
+
+    @each $className, $line-height in $text-line-heights {
+      &-#{$className} {
+        line-height: $line-height;
+      }
+    }
+  }
+}
