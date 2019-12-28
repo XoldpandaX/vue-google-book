@@ -20,12 +20,6 @@ $primary-background: $white;
 $secondary-background: $light-gray;
 $tertiary-background: $dark-gray;
 
-// colors by use
-$search-tooltip: $deep-dark-gray;
-$additional-text: $green;
-$input-placeholder: $light-ashen;
-$input-border: $gray;
-
 
 // ---------------- fonts
 $primary-font: 'Roboto', Helvetica, Arial, sans-serif;
@@ -33,16 +27,23 @@ $primary-font: 'Roboto', Helvetica, Arial, sans-serif;
 
 // ---------------- font sizes
 // text
-$primary-font-size: 0.9375rem; // 15px
-$secondary-font-size: 0.8125rem; // 13px
-$tertiary-font-size: 1.0625rem; // 17px
+$primary-font-size: rem(15px);
+$secondary-font-size: rem(13px);
+$tertiary-font-size: rem(17px);
 
 // titles
-$h1-font-size: 1.3125rem; // 21px
-$h2-font-size: 1.1875rem; // 19px
+$h1-font-size: rem(21px);
+$h2-font-size: rem(19px);
 $h3-font-size: $tertiary-font-size;
 
 
 // ---------------- different sizes
 $primary-border-radius: rem(4px);
+$primary-border-color: $gray;
+
+// colors by use
+$search-tooltip: $deep-dark-gray;
+$additional-text: $green;
+$input-placeholder: $light-ashen;
+$input-border: $gray;
 
