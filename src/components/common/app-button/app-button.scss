@@ -1,0 +1,68 @@
+@import "~sass-rem/rem";
+@import 'src/assets/styles/base/variables';
+@import 'src/assets/styles/helpers/template-selectors';
+
+.app-button {
+  // button colors
+  $main-btn-color: $white;
+  $primary-hover-btn-color: $deep-dark-gray;
+  $primary-btn-background: $deep-dark-gray;
+  $secondary-hover-btn-color: $ashen;
+  $secondary-btn-background: $ashen;
+
+  $common-opacity: .8;
+
+  @extend %transition-all;
+  display: flex;
+  justify-content: center;
+  padding: 16.5px 10px;
+  width: 100%;
+  min-height: rem(49px);
+  border: none;
+  border-radius: $primary-border-radius;
+  cursor: pointer;
+  color: $main-btn-color;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  outline: none;
+  opacity: $common-opacity;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  &--primary {
+    background-color: $primary-btn-background;
+  }
+
+  &--secondary {
+    background-color: $secondary-btn-background;
+  }
+
+  &--with-icon {
+    width: auto;
+    min-height: 0;
+    padding: 0;
+    background-color: transparent;
+    border-radius: 0;
+    opacity: 1;
+  }
+
+  &--small {
+    max-width: rem(130px);
+  }
+
+  &--medium {
+    max-width: rem(200px)
+  }
+
+  &--disable {
+    cursor: not-allowed;
+    opacity: $common-opacity;
+
+    &:hover {
+      opacity: $common-opacity;
+    }
+  }
+}
