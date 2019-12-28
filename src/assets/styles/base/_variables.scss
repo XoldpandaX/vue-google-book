@@ -11,10 +11,10 @@ $deep-dark-gray: rgba(0, 0, 0, 0.700776);
 $green: #417505;
 
 // main colors
-$primary-text: $black;
-$secondary-text: $ashen;
-$tertiary-text: $dark-gray;
-$quaternary-text: $gray;
+$primary-text-color: $black;
+$secondary-text-color: $ashen;
+$tertiary-text-color: $dark-gray;
+$quaternary-text-color: $gray;
 
 $primary-background: $white;
 $secondary-background: $light-gray;
@@ -30,6 +30,8 @@ $primary-font: 'Roboto', Helvetica, Arial, sans-serif;
 $primary-font-size: rem(15px);
 $secondary-font-size: rem(13px);
 $tertiary-font-size: rem(17px);
+$primary-font-line-height: 1.15;
+$secondary-font-line-height: 1.6;
 
 // titles
 $h1-font-size: rem(21px);
