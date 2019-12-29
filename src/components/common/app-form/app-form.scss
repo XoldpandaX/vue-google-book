@@ -1,0 +1,28 @@
+@import "~sass-rem/rem";
+@import 'src/assets/styles/helpers/template-selectors';
+
+.app-form {
+
+  &__input {
+    @extend %common-input;
+    max-width: 100%;
+    background-color: transparent;
+    box-shadow: none;
+    border-radius: 0;
+  }
+
+  &__row {
+    margin-bottom: rem(25px);
+  }
+
+  &__button-row {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__error {
+    color: $alert;
+    font-weight: bold;
+    font-family: Arial;
+  }
+}
