@@ -10,6 +10,23 @@ body {
 body {
   position: relative;
   font-family: $primary-font;
+  background-color: $secondary-background;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+h1,h2,h3 {
+  margin: 0;
+}
+
+h1 {
+  font-size: $h1-font-size;
+}
+
+h2 {
+  font-size: $h2-font-size;
+}
+
+h3 {
+  font-size: $h3-font-size;
 }

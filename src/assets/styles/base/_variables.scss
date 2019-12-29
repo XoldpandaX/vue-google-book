@@ -1,3 +1,5 @@
+@import "~sass-rem/rem";
+
 // ---------------- colors
 // palette
 $black: #000;
@@ -9,6 +11,8 @@ $gray: #7D8888;
 $dark-gray: #848E8E;
 $deep-dark-gray: rgba(0, 0, 0, 0.700776);
 $green: #417505;
+$dark-green: rgba(19, 35, 47, 0.9);
+$red: #ea3232;
 
 // main colors
 $primary-text-color: $black;
@@ -19,6 +23,9 @@ $quaternary-text-color: $gray;
 $primary-background: $white;
 $secondary-background: $light-gray;
 $tertiary-background: $dark-gray;
+$quaternary-background: $dark-green;
+
+$alert: $red;
 
 
 // ---------------- fonts
