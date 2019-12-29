@@ -1,0 +1,19 @@
+@import 'src/assets/styles/base/variables';
+
+.app-title {
+
+  &--color {
+    $title-colors: (
+      primary: $primary-text-color,
+      secondary: $secondary-text-color,
+      tertiary: $tertiary-text-color,
+      quaternary: $quaternary-text-color
+    );
+
+    @each $className, $color in $title-colors {
+      &-#{$className} {
+        color: $color;
+      }
+    }
+  }
+}
