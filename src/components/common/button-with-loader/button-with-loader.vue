@@ -2,7 +2,8 @@
   <app-button
     type="primary"
     size="small"
-    :isEnable="isEnable"
+    :attr-type="attrType"
+    :is-enable="isEnable"
     @button-click="$emit('button-click')"
   >
     <slot v-if="isEnable" />
@@ -28,6 +29,7 @@ export default {
   },
   props: {
     isEnable: VueTypes.bool.def(true),
+    attrType: VueTypes.string.def('button'),
   },
 };
 </script>
