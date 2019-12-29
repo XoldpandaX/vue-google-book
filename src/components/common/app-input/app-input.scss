@@ -1,17 +1,5 @@
-@import "~sass-rem/rem";
-@import 'src/assets/styles/base/variables';
+@import 'src/assets/styles/helpers/template-selectors';
 
 .app-input {
-  @include rem(padding, 11px 16px);
-  @include rem(box-shadow, 0px 16px 17px rgba(0, 0, 0, 0.201427));
-  max-width: rem(390px);
-  width: 100%;
-  border: 1px solid $primary-border-color;
-  border-radius: $primary-border-radius;
-  outline: none;
-  font-size: $tertiary-font-size;
-
-  &::placeholder {
-    color: $input-placeholder;
-  }
+  @extend %common-input;
 }
