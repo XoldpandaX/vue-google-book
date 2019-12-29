@@ -1,0 +1,22 @@
+@import "~sass-rem/rem";
+@import 'src/assets/styles/base/variables';
+
+.form-auth {
+  max-width: rem(600px);
+  overflow-y: hidden;
+  width: 100%;
+  padding: 4.5% 4%;
+  border-radius: $primary-border-radius;
+  background-color: $quaternary-background;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+
+  &__switch {
+    display: flex;
+    margin-bottom: rem(40px);
+  }
+
+  .app-title {
+    margin-bottom: rem(35px);
+    text-align: center;
+  }
+}
