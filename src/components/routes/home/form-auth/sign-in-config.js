@@ -12,7 +12,7 @@ export default [
     name: 'password',
     type: 'password',
     model: 'password',
-    rules: 'required',
+    rules: 'alpha_dash|required',
     placeholder: 'Password',
   },
 ];

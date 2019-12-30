@@ -20,7 +20,7 @@ export default [
     name: 'password',
     type: 'password',
     model: 'password',
-    rules: 'required|min:6|password:@confirmPassword',
+    rules: 'alpha_dash|required|min:6',
     placeholder: 'Password',
   },
   {
@@ -28,7 +28,7 @@ export default [
     name: 'confirmPassword',
     type: 'password',
     model: 'confirmPassword',
-    rules: 'required',
+    rules: 'alpha_dash|required|min:6|password:@password',
     placeholder: 'Confirm password',
   },
 ];
