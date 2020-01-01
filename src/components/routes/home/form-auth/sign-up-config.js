@@ -1,13 +1,5 @@
 export default [
   {
-    id: 'name',
-    name: 'name',
-    type: 'text',
-    model: 'name',
-    rules: 'required|alpha|min:2',
-    placeholder: 'User name',
-  },
-  {
     id: 'email',
     name: 'email',
     type: 'email',
