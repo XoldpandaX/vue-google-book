@@ -10,11 +10,11 @@
     </app-title>
     <app-form
       :config="formConfig"
-      @form-validated="handleSuccess"
+      @form-validated="handleValidatedForm"
     >
       <template v-slot:submit-button>
         <button-with-loader
-          :is-enable="true"
+          :is-enable="!isAuthInProcess"
           attr-type="submit"
         >
           {{ submitBtnText }}
@@ -25,9 +25,10 @@
 </template>
 
 <script>
-import FORM_AUTH_CONSTANTS from './form-auth-consts';
+import VueTypes from 'vue-types';
 import signUpConfig from './sign-up-config';
 import signInConfig from './sign-in-config';
+import { FORM_AUTH_CONSTANTS } from '@/constants';
 
 import { AppForm } from '@/components/common/app-form';
 import { AppTitle } from '@/components/common/app-title';
@@ -42,34 +43,42 @@ export default {
     ButtonWithLoader,
     FormAuthSwitch,
   },
+  props: {
+    isAuthInProcess: VueTypes.bool.isRequired,
+  },
   data() {
     return {
-      activeTabId: FORM_AUTH_CONSTANTS.LOG_IN_SWITCH_BTN_ID,
+      activeTabId: FORM_AUTH_CONSTANTS.LOG_IN_FORM_ID,
     };
   },
   computed: {
     formConfig() {
       return {
-        [FORM_AUTH_CONSTANTS.SIGN_UP_SWITCH_BTN_ID]: signUpConfig,
-        [FORM_AUTH_CONSTANTS.LOG_IN_SWITCH_BTN_ID]: signInConfig,
+        [FORM_AUTH_CONSTANTS.SIGN_UP_FORM_ID]: signUpConfig,
+        [FORM_AUTH_CONSTANTS.LOG_IN_FORM_ID]: signInConfig,
       }[this.activeTabId];
     },
     submitBtnText() {
       return {
-        [FORM_AUTH_CONSTANTS.SIGN_UP_SWITCH_BTN_ID]: FORM_AUTH_CONSTANTS.SIGN_UP_BTN_TEXT,
-        [FORM_AUTH_CONSTANTS.LOG_IN_SWITCH_BTN_ID]: FORM_AUTH_CONSTANTS.LOG_IN_BTN_TEXT,
+        [FORM_AUTH_CONSTANTS.SIGN_UP_FORM_ID]: FORM_AUTH_CONSTANTS.SIGN_UP_BTN_TEXT,
+        [FORM_AUTH_CONSTANTS.LOG_IN_FORM_ID]: FORM_AUTH_CONSTANTS.LOG_IN_BTN_TEXT,
       }[this.activeTabId];
     },
     formTitle() {
       return {
-        [FORM_AUTH_CONSTANTS.SIGN_UP_SWITCH_BTN_ID]: FORM_AUTH_CONSTANTS.SIGN_UP_FORM_TITLE,
-        [FORM_AUTH_CONSTANTS.LOG_IN_SWITCH_BTN_ID]: FORM_AUTH_CONSTANTS.LOG_IN_FORM_TITLE,
+        [FORM_AUTH_CONSTANTS.SIGN_UP_FORM_ID]: FORM_AUTH_CONSTANTS.SIGN_UP_FORM_TITLE,
+        [FORM_AUTH_CONSTANTS.LOG_IN_FORM_ID]: FORM_AUTH_CONSTANTS.LOG_IN_FORM_TITLE,
       }[this.activeTabId];
     },
   },
   methods: {
-    handleSuccess(data) {
-      console.info(data);
+    handleValidatedForm(formFields) {
+      if (!this.isAuthInProcess) { // reducing additional clicks while auth in process
+        this.$emit('submit-click', {
+          formFields,
+          formType: this.activeTabId,
+        });
+      }
     },
     handleSwitch(activeTabId) {
       this.activeTabId = activeTabId;
