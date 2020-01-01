@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import FORM_AUTH_CONSTANTS from './form-auth-consts';
+import { FORM_AUTH_CONSTANTS } from '@/constants';
 
 import { AppButton } from '@/components/common/app-button';
 
@@ -26,12 +26,12 @@ export default {
     return {
       switchButtons: [
         {
-          id: FORM_AUTH_CONSTANTS.LOG_IN_SWITCH_BTN_ID,
+          id: FORM_AUTH_CONSTANTS.LOG_IN_FORM_ID,
           title: FORM_AUTH_CONSTANTS.LOG_IN_BTN_TEXT,
           isChosen: true,
         },
         {
-          id: FORM_AUTH_CONSTANTS.SIGN_UP_SWITCH_BTN_ID,
+          id: FORM_AUTH_CONSTANTS.SIGN_UP_FORM_ID,
           title: FORM_AUTH_CONSTANTS.SIGN_UP_BTN_TEXT,
           isChosen: false,
         },
