@@ -4,12 +4,14 @@
     v-slot="{ item }"
     :list-items="searchTips"
   >
-    <app-text
-      size-type="primary"
-      color-type="secondary"
-    >
-      {{ item.title }}
-    </app-text>
+    <div @click="$emit('click-search-tip', item.id)">
+      <app-text
+        size-type="primary"
+        color-type="secondary"
+      >
+        {{ item.title }}
+      </app-text>
+    </div>
   </app-list>
 </template>
 
