@@ -1,0 +1,20 @@
+@import "~sass-rem/rem";
+
+.list-search-tips {
+  margin: 0;
+  padding: rem(16px 12px 20px 16px);
+  list-style: none;
+  border-top: 1px solid #E0E4E7;
+
+  li {
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-bottom: rem(20px);
+    }
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+}
