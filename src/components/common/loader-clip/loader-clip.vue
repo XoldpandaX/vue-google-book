@@ -11,7 +11,6 @@ import VueTypes from 'vue-types';
 export default {
   name: 'loader-clip',
   props: {
-    isLoading: VueTypes.bool.def(false),
     color: VueTypes.string.def('#F5A623'),
     size: VueTypes.string.def('35px'),
   },
