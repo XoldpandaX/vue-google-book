@@ -10,6 +10,7 @@ export default function ({ data }) {
       const authors = get(volumeInfo, 'authors', []);
       const averageRating = get(volumeInfo, 'averageRating', null);
       const title = get(volumeInfo, 'title', '');
+      const thumbnail = get(volumeInfo, ['imageLinks', 'thumbnail'], '');
 
       return {
         ...pick(volumeInfo, [
@@ -18,6 +19,7 @@ export default function ({ data }) {
         ]),
         id,
         etag,
+        thumbnail,
         averageRating,
         title,
         abbreviatedTitle: title.length > 51 ? `${title.slice(0, 48)}...` : title.slice(0, 51),
