@@ -1,0 +1,13 @@
+@import "~sass-rem/rem";
+
+.book-info {
+  position: relative;
+
+  &__init-title {
+    position: absolute;
+    bottom: rem(252px);
+    right: rem(32px);
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+}
