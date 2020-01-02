@@ -1,0 +1,17 @@
+@import "~sass-rem/rem";
+
+.wrapper-main {
+  padding: 5%;
+
+  &__row {
+    display: flex;
+
+    .button-favorites {
+      margin-right: rem(12px);
+    }
+
+    .container-search {
+      flex: 1;
+    }
+  }
+}
