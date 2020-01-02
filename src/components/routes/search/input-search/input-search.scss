@@ -1,0 +1,31 @@
+%common-styles {
+  position: absolute;
+  right: 15px;
+  top: 11px;
+}
+
+.input-search {
+  position: relative;
+
+  &__button {
+    @extend %common-styles;
+  }
+
+  .loader-clip {
+    @extend %common-styles;
+  }
+
+  &--active {
+    .app-input {
+      border: none;
+      box-shadow: none;
+    }
+  }
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
