@@ -7,7 +7,7 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import { FORM_AUTH_CONSTANTS } from '@/constants';
+import { FORM_AUTH_CONSTANTS, ROUTES } from '@/constants';
 
 import { FormAuth } from '../form-auth';
 
@@ -32,6 +32,7 @@ export default {
         email: formFields.email,
         password: formFields.password,
       });
+      await this.$router.push({ name: ROUTES.SEARCH.NAME });
     },
   },
 };
