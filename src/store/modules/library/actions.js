@@ -1,6 +1,6 @@
-// import * as mutationTypes from './mutation-types';
-import { addFavoriteBook } from './services';
-import { mapFavoriteBooks } from './mappers';
+import * as mutationTypes from './mutation-types';
+import { addFavoriteBook, searchBooks } from './services';
+import { mapFavoriteBooks, mapSearchResults, mapSearchTips } from './mappers';
 
 export default {
   async addBookToFavorite({ commit }) {
@@ -11,5 +11,31 @@ export default {
     } catch (e) {
       console.error(e, 'error while addBookToFavorite');
     }
+  },
+  async performSearch({ commit, dispatch }, { query }) {
+    try {
+      commit(mutationTypes.SET_PROCESS_STATUS, { isInProcess: true });
+
+      await dispatch('setQueryString', { query });
+      const books = await searchBooks({ query }).then(mapSearchResults);
+
+      if (books) {
+        commit(mutationTypes.SET_BOOK_LIST, { books });
+        commit(mutationTypes.SET_SEARCH_TIPS, { tips: mapSearchTips(books) });
+      }
+    } catch (e) {
+      console.error(e, 'error while performSearch');
+    } finally {
+      commit(mutationTypes.SET_PROCESS_STATUS, { isInProcess: false });
+    }
+  },
+  setQueryString({ commit }, { query }) {
+    commit(mutationTypes.SET_QUERY_STRING, { query });
+  },
+  resetQueryString({ commit }) {
+    commit(mutationTypes.RESET_QUERY_STRING);
+  },
+  resetSearchTips({ commit }) {
+    commit(mutationTypes.RESET_SEARCH_TIPS);
   },
 };
