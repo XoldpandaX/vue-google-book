@@ -1,0 +1,26 @@
+@import "~sass-rem/rem";
+@import 'src/assets/styles/base/variables';
+
+.search-page {
+  height: 100%;
+  padding: 0 15px;
+
+  &--center-pos {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--indent-pos {
+    margin: 0 auto;
+    padding-top: 15px;
+  }
+
+  &__wrapper {
+    display: flex;
+    max-width: rem(1280px);
+    width: 100%;
+    height: rem(900px);
+    background-color: $secondary-background;
+  }
+}
