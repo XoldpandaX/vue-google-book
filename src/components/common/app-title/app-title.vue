@@ -1,21 +1,13 @@
 <script>
+import VueTypes from 'vue-types';
+
 export default {
   name: 'app-title',
   props: {
-    level: {
-      type: Number,
-      required: true,
-    },
-    typeColor: {
-      type: String,
-    },
-    customColor: {
-      type: String,
-      default: '',
-    },
-    customFontSize: {
-      type: Number,
-    },
+    level: VueTypes.number.isRequired,
+    typeColor: VueTypes.oneOf(['primary', 'secondary', 'tertiary', 'quaternary']),
+    customColor: VueTypes.string.def(''),
+    customFontSize: VueTypes.number,
   },
   render(h) {
     return h(
@@ -23,10 +15,7 @@ export default {
       {
         class: {
           'app-title': true,
-          'app-title--color-primary': this.typeColor === 'primary',
-          'app-title--color-secondary': this.typeColor === 'secondary',
-          'app-title--color-tertiary': this.typeColor === 'tertiary',
-          'app-title--color-quaternary': this.typeColor === 'quaternary',
+          [`app-title--color-${this.typeColor}`]: true,
         },
         style: {
           color: !this.typeColor && this.customColor ? this.customColor : '',
