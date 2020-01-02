@@ -12,7 +12,10 @@
       @down-press="handleDownPress"
       @up-press="handleUpPress"
     />
-    <list-search-tips :search-tips="searchTips" />
+    <list-search-tips
+      :search-tips="searchTips"
+      @click-search-tip="handleSearchTipClick"
+    />
   </form>
 </template>
 
@@ -56,8 +59,8 @@ export default {
       'performSearch',
       'resetQueryString',
       'resetSearchTips',
+      'setChosenBookInfo',
     ]),
-
     async handleSearch(query) {
       if (query) {
         await this.performSearch({ query });
@@ -69,6 +72,9 @@ export default {
     async handleCrossClick() {
       await this.resetQueryString();
       await this.resetSearchTips();
+    },
+    async handleSearchTipClick(bookId) {
+      await this.setChosenBookInfo({ bookId });
     },
     handleSubmit() {
       console.info('search btn clicked');
