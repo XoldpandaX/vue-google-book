@@ -1,6 +1,7 @@
 <template>
   <app-button
     type="with-icon"
+    :attr-type="attrType"
     @button-click="$emit('button-click')"
   >
     <app-icon
@@ -31,6 +32,7 @@ export default {
       height: VueTypes.number,
     }),
     iconColor: VueTypes.string,
+    attrType: VueTypes.string.def('button'),
   },
 };
 </script>
