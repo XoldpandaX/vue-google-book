@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import * as firebase from 'firebase';
-import router from './router';
+import createRouter from './router';
 import createStore from '@/store';
 import { FIREBASE_CONFIG } from './constants';
 import { settingUpVeeValidate } from './plugins';
@@ -11,6 +11,7 @@ Vue.config.productionTip = false;
 
 let app;
 const store = createStore();
+const router = createRouter(store);
 settingUpVeeValidate();
 
 firebase.initializeApp(FIREBASE_CONFIG);
