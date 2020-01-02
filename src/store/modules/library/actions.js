@@ -35,6 +35,11 @@ export default {
   resetQueryString({ commit }) {
     commit(mutationTypes.RESET_QUERY_STRING);
   },
+  setChosenBookInfo({ commit, getters }, { bookId }) {
+    commit(mutationTypes.SET_CHOSEN_BOOK_INFO, {
+      book: getters.booksList.filter((book) => bookId === book.id),
+    });
+  },
   resetSearchTips({ commit }) {
     commit(mutationTypes.RESET_SEARCH_TIPS);
   },

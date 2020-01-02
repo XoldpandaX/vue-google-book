@@ -16,6 +16,9 @@ export default {
   [mutationTypes.RESET_SEARCH_TIPS](state) {
     state.searchTips = [];
   },
+  [mutationTypes.SET_CHOSEN_BOOK_INFO](state, { book }) {
+    state.chosenBookInfo = book;
+  },
   [mutationTypes.SET_PROCESS_STATUS](state, { isInProcess }) {
     state.isInProcess = isInProcess;
   },

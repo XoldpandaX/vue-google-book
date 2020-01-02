@@ -3,6 +3,7 @@ export default {
   favoriteBooks: [],
   searchTips: [],
   booksList: [],
+  chosenBookInfo: {},
   isBooksListVisible: false,
   isInProcess: false,
 };
