@@ -5,6 +5,7 @@
       placeholder="Search"
       custom-type="search"
       width="100%"
+      @focus="handleInput"
       @input="handleInput"
       @press-key-down="$emit('down-press')"
       @press-key-up="$emit('up-press')"
