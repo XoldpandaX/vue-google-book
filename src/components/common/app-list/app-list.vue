@@ -1,8 +1,8 @@
 <template>
   <ul class="app-list">
     <li
-      v-for="listItem in listItems"
-      :key="listItem.id"
+      v-for="(listItem, idx) in listItems"
+      :key="listItem.id + idx"
     >
       <slot :item="listItem" />
     </li>
