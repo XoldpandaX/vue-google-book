@@ -19,7 +19,7 @@ export default {
         },
         style: {
           color: !this.typeColor && this.customColor ? this.customColor : '',
-          fontSize: this.customFontSize && `${this.customFontSize}px`,
+          fontSize: this.customFontSize ? `${this.customFontSize}px` : null,
         },
       },
       this.$slots.default,
@@ -28,6 +28,6 @@ export default {
 };
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
   @import 'app-title';
 </style>
