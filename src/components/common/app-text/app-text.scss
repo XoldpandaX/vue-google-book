@@ -23,7 +23,8 @@
       primary: $primary-text-color,
       secondary: $secondary-text-color,
       tertiary: $tertiary-text-color,
-      quaternary: $quaternary-text-color
+      quaternary: $quaternary-text-color,
+      additional: $additional-text-color,
     );
 
     @each $className, $color in $text-colors {
