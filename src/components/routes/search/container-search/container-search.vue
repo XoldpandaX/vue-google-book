@@ -4,6 +4,7 @@
     @submit.prevent="handleSubmit"
   >
     <input-search
+      v-click-outside="resetSearchTips"
       :value="queryString"
       :is-active="isSearchTipsExist"
       :is-searching="isSearchPerforming"
@@ -35,6 +36,11 @@ export default {
   created() {
     this.debouncedHandleSearch = debounce(this.handleSearch, 250);
   },
+  data() {
+    return {
+      isSearchTipsVisible: false,
+    };
+  },
   computed: {
     ...mapGetters('library', [
       'queryString',
@@ -59,7 +65,8 @@ export default {
       'performSearch',
       'resetQueryString',
       'resetSearchTips',
-      'setChosenBookInfo',
+      'chooseBookById',
+      'saveSearchResults',
     ]),
     async handleSearch(query) {
       if (query) {
@@ -70,14 +77,23 @@ export default {
       }
     },
     async handleCrossClick() {
-      await this.resetQueryString();
-      await this.resetSearchTips();
+      await Promise.all([
+        this.resetQueryString(),
+        this.resetSearchTips(),
+      ]);
     },
     async handleSearchTipClick(bookId) {
-      await this.setChosenBookInfo({ bookId });
+      await Promise.all([
+        this.chooseBookById({ bookId }),
+        this.saveSearchResults(),
+        this.resetSearchTips(),
+      ]);
     },
-    handleSubmit() {
-      console.info('search btn clicked');
+    async handleSubmit() {
+      await Promise.all([
+        this.saveSearchResults(),
+        this.resetSearchTips(),
+      ]);
     },
     handleDownPress() {
       console.info('press down');
