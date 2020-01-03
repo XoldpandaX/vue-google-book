@@ -1,7 +1,7 @@
 <template>
   <wrapper-template
     class="wrapper-main"
-    :size="{ width: '50%', height: '100%' }"
+    :size="{ width: '46%', height: '100%' }"
   >
     <div class="wrapper-main__row">
       <container-favorites />
