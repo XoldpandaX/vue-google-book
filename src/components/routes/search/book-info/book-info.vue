@@ -1,18 +1,25 @@
 <template>
   <wrapper-template
     class="book-info"
-    :size="{ width: '50%', height: '100%' }"
-    :background-image="initBackground"
+    :size="{ width: '54%', height: '100%' }"
+    :background-image="initBackgroundImage"
+    :background-color="mainBackgroundColor"
   >
-    <app-title
-      v-if="isBookEmpty"
-      class="book-info__init-title"
-      type-color="secondary"
-      :level="1"
-      :custom-font-size="60"
-    >
-      Library
-    </app-title>
+    <init-title v-if="isBookEmpty">Library</init-title>
+
+    <template v-else>
+      <div class="book-info__inner">
+        <book-cover :source="book.thumbnail" />
+        <div class="book-info__main">
+          <book-description :description="bookDescription" />
+          <book-rating
+            v-if="isBookRatingExist"
+            :rating="book.averageRating"
+          />
+        </div>
+      </div>
+      <book-excerpt>{{ book.description }}</book-excerpt>
+    </template>
   </wrapper-template>
 </template>
 
@@ -21,24 +28,54 @@ import VueTypes from 'vue-types';
 import isEmpty from 'lodash.isempty';
 import backgroundImage from '@/assets/svg/background.svg';
 
-import { AppTitle } from '@/components/common/app-title';
+import BookCover from './book-cover.vue';
+import BookExcerpt from './book-excerpt.vue';
+import { BookDescription } from './book-description';
+import BookRating from './book-rating.vue';
+import InitTitle from './init-title.vue';
 import { WrapperTemplate } from '@/components/common/wrapper-template';
 
 export default {
   name: 'book-info',
   components: {
-    AppTitle,
+    BookCover,
+    BookExcerpt,
+    BookDescription,
+    BookRating,
+    InitTitle,
     WrapperTemplate,
   },
   props: {
-    book: VueTypes.object.def({}), // TODO: need to create shape when structure appears
+    book: VueTypes.shape({
+      id: VueTypes.string,
+      averageRating: VueTypes.oneOfType([VueTypes.number, VueTypes.string]),
+      title: VueTypes.string,
+      publishedYear: VueTypes.string,
+      authors: VueTypes.string,
+      description: VueTypes.string,
+      thumbnail: VueTypes.string,
+    }).isRequired,
   },
   computed: {
     isBookEmpty() {
       return isEmpty(this.book);
     },
-    initBackground() {
-      return backgroundImage;
+    isBookRatingExist() {
+      return !!this.book.averageRating;
+    },
+    initBackgroundImage() {
+      return this.isBookEmpty ? backgroundImage : '';
+    },
+    mainBackgroundColor() {
+      return !this.isBookEmpty ? '#F3F3F3' : '';
+    },
+    bookDescription() {
+      return {
+        title: this.book.title,
+        rating: this.book.averageRating,
+        authors: this.book.authors,
+        year: this.book.publishedYear,
+      };
     },
   },
 };

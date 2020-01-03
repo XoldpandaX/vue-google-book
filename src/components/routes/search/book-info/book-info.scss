@@ -2,6 +2,7 @@
 
 .book-info {
   position: relative;
+  padding: 5%;
 
   &__init-title {
     position: absolute;
@@ -9,5 +10,45 @@
     right: rem(32px);
     font-weight: 900;
     text-transform: uppercase;
+  }
+
+  &__inner {
+    display: flex;
+    margin-bottom: rem(51px);
+  }
+
+  &__main {
+    display: flex;
+    flex-direction: column;
+    margin-left: 6%;
+    padding-top: rem(10px);
+
+    /deep/ .app-title {
+      margin-bottom: rem(16px);
+      line-height: 26px;
+    }
+
+    /deep/ .book-rating {
+      display: flex;
+      align-items: center;
+
+      /deep/ .app-rating {
+        margin: rem(1px 14px 0 0);
+      }
+    }
+
+    /deep/ &-extra {
+      margin-bottom: rem(16px);
+    }
+  }
+
+  /deep/ .book-excerpt {
+    .app-title {
+      margin-bottom: rem(16px);
+    }
+  }
+
+  /deep/ .book-cover {
+    box-shadow: 0 14px 21px rgba(0, 0, 0, 0.397532);
   }
 }
