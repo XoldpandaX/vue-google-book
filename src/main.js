@@ -3,6 +3,7 @@ import * as firebase from 'firebase';
 import createRouter from './router';
 import createStore from '@/store';
 import { FIREBASE_CONFIG } from './constants';
+import { clickOutside } from './derectives';
 import { settingUpVeeValidate } from './plugins';
 
 import { App } from './components/app';
@@ -14,6 +15,8 @@ const store = createStore();
 const router = createRouter(store);
 settingUpVeeValidate();
 
+Vue.directive('click-outside', clickOutside);
+
 firebase.initializeApp(FIREBASE_CONFIG);
 firebase.auth().onAuthStateChanged(async (user) => {
   // received user and doesn't have user data in the store - (in case of page reloading)
@@ -21,9 +24,11 @@ firebase.auth().onAuthStateChanged(async (user) => {
     await store.dispatch('auth/saveUser', user);
   }
 
-  app = new Vue({
-    router,
-    store,
-    render: h => h(App),
-  }).$mount('#app');
+  if (!app) {
+    app = new Vue({
+      router,
+      store,
+      render: h => h(App),
+    }).$mount('#app');
+  }
 });
