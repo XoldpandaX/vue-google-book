@@ -51,7 +51,6 @@ export default {
       emptyStarColor: '#000000',
       fullStarColor: '#F5A623',
     }),
-    startStyle: VueTypes.object.def({}),
   },
   computed: {
     starPoints() {
