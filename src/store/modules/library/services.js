@@ -15,6 +15,8 @@ export function searchBooks({ query }) {
       q: query,
       printType: 'books',
       key: FIREBASE_CONFIG.apiKey,
+      fields: 'totalItems, items(kind, id, etag, volumeInfo)',
+      prettyPrint: false,
     },
   });
 }
