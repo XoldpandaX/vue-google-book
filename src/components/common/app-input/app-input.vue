@@ -5,6 +5,7 @@
     :type="type"
     :placeholder="placeholder"
     :style="customWidth"
+    @focus="$emit('input', $event.target.value)"
     @input="$emit('input', $event.target.value)"
     @keydown.down="handleArrowBtnPress"
     @keydown.up="handleArrowBtnPress"
