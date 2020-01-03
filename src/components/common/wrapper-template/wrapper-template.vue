@@ -20,6 +20,7 @@ export default {
   computed: {
     styles() {
       const { size, backgroundImage, ...rest } = this.$props;
+
       return {
         ...rest,
         width: size.width,
