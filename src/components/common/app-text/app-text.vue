@@ -19,7 +19,7 @@ import VueTypes from 'vue-types';
 export default {
   name: 'app-text',
   props: {
-    sizeType: VueTypes.oneOf(['primary', 'secondary', 'tertiary']).isRequired,
+    sizeType: VueTypes.oneOf(['primary', 'secondary', 'tertiary']).def('primary'),
     colorType: VueTypes.oneOf([
       'primary',
       'secondary',
@@ -27,7 +27,8 @@ export default {
       'quaternary',
       'additional',
     ]).def('primary'),
-    lineHeightType: VueTypes.oneOf(['primary', 'secondary']).def('primary'),
+    lineHeightType: VueTypes.oneOf(['primary', 'secondary', 'tertiary'])
+      .def('primary'),
     isInline: VueTypes.bool.def(false),
   },
   computed: {

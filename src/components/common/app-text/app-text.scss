@@ -37,7 +37,8 @@
   &--line-height {
     $text-line-heights: (
       primary: $primary-font-line-height,
-      secondary: $secondary-font-line-height
+      secondary: $secondary-font-line-height,
+      tertiary: $tertiary-font-line-height,
     );
 
     @each $className, $line-height in $text-line-heights {
