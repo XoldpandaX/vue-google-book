@@ -1,12 +1,14 @@
 <template>
   <div :class="rootClasses">
     <app-input
-      :value="value"
       placeholder="Search"
       custom-type="search"
       width="100%"
-      @focus="handleInput"
+      :value="value"
+      :has-handler-on-enter="true"
+      @focus="handleFocus"
       @input="handleInput"
+      @enter-press="handleEnterPress"
       @press-key-down="$emit('down-press')"
       @press-key-up="$emit('up-press')"
     />
@@ -59,8 +61,15 @@ export default {
     },
   },
   methods: {
+    handleFocus(fieldVal) {
+      this.$emit('search-focus', fieldVal);
+    },
     handleInput(fieldVal) {
       this.$emit('search-input', fieldVal);
+    },
+    handleEnterPress(e) {
+      e.target.blur();
+      this.$emit('enter-press', e.target.value);
     },
   },
 };
