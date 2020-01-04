@@ -10,6 +10,7 @@ $light-gray: #F3F3F3;
 $gray: #7D8888;
 $dark-gray: #848E8E;
 $deep-dark-gray: rgba(0, 0, 0, 0.700776);
+$special-gray: #979797;
 $green: #417505;
 $dark-green: rgba(19, 35, 47, 0.9);
 $red: #ea3232;
@@ -39,6 +40,7 @@ $secondary-font-size: rem(13px);
 $tertiary-font-size: rem(17px);
 $primary-font-line-height: 1.15;
 $secondary-font-line-height: 1.6;
+$tertiary-font-line-height: 1.35;
 
 // titles
 $h1-font-size: rem(21px);
@@ -49,6 +51,7 @@ $h3-font-size: $tertiary-font-size;
 // ---------------- different sizes
 $primary-border-radius: rem(4px);
 $primary-border-color: $gray;
+$secondary-border-color: $special-gray;
 
 // colors by use
 $search-tooltip: $deep-dark-gray;
