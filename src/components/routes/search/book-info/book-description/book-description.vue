@@ -31,7 +31,7 @@ export default {
       rating: VueTypes.oneOfType([VueTypes.number, VueTypes.string]),
       authors: VueTypes.string,
       year: VueTypes.string,
-    }),
+    }).isRequired,
   },
 };
 </script>
