@@ -45,12 +45,12 @@ export default {
       height: VueTypes.number,
       emptyStarColor: VueTypes.string,
       fullStarColor: VueTypes.string,
-    }).def({
+    }).def(() => ({
       width: 20,
       height: 19,
       emptyStarColor: '#000000',
       fullStarColor: '#F5A623',
-    }),
+    })),
   },
   computed: {
     starPoints() {
