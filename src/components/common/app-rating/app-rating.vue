@@ -7,7 +7,9 @@
     >
       <svg
         class="star-svg"
-        :style="getSvgInnerStyles(star.gradientId)"
+        :fill="`url(#gradient${star.gradientId})`"
+        :width="config.width"
+        :height="config.height"
       >
         <polygon
           style="fill-rule:nonzero;"
@@ -76,13 +78,6 @@ export default {
     },
   },
   methods: {
-    getSvgInnerStyles(gradientId) {
-      return [
-        { fill: `url(#gradient${gradientId})` },
-        { width: this.config.width },
-        { height: this.config.height },
-      ];
-    },
     getFullFillColor({ gradientId }) {
       const { fullStarColor, emptyStarColor } = this.config;
       return gradientId !== emptyStar ? fullStarColor : emptyStarColor;
