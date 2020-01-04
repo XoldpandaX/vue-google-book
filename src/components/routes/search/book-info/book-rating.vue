@@ -3,7 +3,7 @@
     <app-rating :rating="rating" />
     <book-extra-text>
       <template v-slot:title>Rating: </template>
-      <template v-slot:info>{{ rating }}</template>
+      <template v-slot:info>{{ rating || 'rating unknown' }}</template>
     </book-extra-text>
   </div>
 </template>
