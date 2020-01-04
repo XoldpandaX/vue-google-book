@@ -1,8 +1,18 @@
 import get from 'lodash.get';
+import { cutStringByLength } from '@/utils';
 
-export default function (books) {
-  return books.map((book) => ({
-    id: get(book, 'id', ''),
-    title: get(book, 'abbreviatedTitle', ''),
-  }));
+export default function ({ data: { items = [] } }) {
+  return (
+    items.length
+      ? items.map((item) => ({
+        id: get(item, 'id', ''),
+        title: (
+          cutStringByLength(
+            get(item, ['volumeInfo', 'title'], ''),
+            40,
+          )
+        ),
+      }))
+      : []
+  );
 }
