@@ -9,13 +9,14 @@
 
     <template v-else>
       <div class="book-info__inner">
-        <book-cover :source="book.thumbnail" />
+        <app-image
+          class="book-cover"
+          alt="book cover"
+          :src="book.thumbnail"
+        />
         <div class="book-info__main">
           <book-description :description="bookDescription" />
-          <book-rating
-            v-if="isBookRatingExist"
-            :rating="book.averageRating"
-          />
+          <book-rating :rating="book.averageRating || 0"/>
         </div>
       </div>
       <book-excerpt>{{ book.description }}</book-excerpt>
@@ -28,7 +29,7 @@ import VueTypes from 'vue-types';
 import isEmpty from 'lodash.isempty';
 import backgroundImage from '@/assets/svg/background.svg';
 
-import BookCover from './book-cover.vue';
+import { AppImage } from '@/components/common/app-image';
 import BookExcerpt from './book-excerpt.vue';
 import { BookDescription } from './book-description';
 import BookRating from './book-rating.vue';
@@ -38,7 +39,7 @@ import { WrapperTemplate } from '@/components/common/wrapper-template';
 export default {
   name: 'book-info',
   components: {
-    BookCover,
+    AppImage,
     BookExcerpt,
     BookDescription,
     BookRating,
@@ -59,9 +60,6 @@ export default {
   computed: {
     isBookEmpty() {
       return isEmpty(this.book);
-    },
-    isBookRatingExist() {
-      return !!this.book.averageRating;
     },
     initBackgroundImage() {
       return this.isBookEmpty ? backgroundImage : '';
