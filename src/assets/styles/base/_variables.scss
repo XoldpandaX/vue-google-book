@@ -11,6 +11,7 @@ $gray: #7D8888;
 $dark-gray: #848E8E;
 $deep-dark-gray: rgba(0, 0, 0, 0.700776);
 $special-gray: #979797;
+$special-light-gray: #CCCCCC;
 $green: #417505;
 $dark-green: rgba(19, 35, 47, 0.9);
 $red: #ea3232;
@@ -52,10 +53,12 @@ $h3-font-size: $tertiary-font-size;
 $primary-border-radius: rem(4px);
 $primary-border-color: $gray;
 $secondary-border-color: $special-gray;
+$tertiary-border-color: $special-light-gray;
 
 // colors by use
 $search-tooltip: $deep-dark-gray;
 $additional-text-color: $green;
 $input-placeholder: $light-ashen;
 $input-border: $gray;
+$pagination-text-color: $white;
 
