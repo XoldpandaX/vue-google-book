@@ -1,5 +1,5 @@
 import * as mutationTypes from './mutation-types';
-import { addFavoriteBook, searchBooks } from './services';
+import { addFavoriteBook, fetchBooks, getSearchTips } from './services';
 import {
   mapFavoriteBooks,
   mapSearchResults,
@@ -17,20 +17,16 @@ export default {
       console.error(e, 'error while addBookToFavorite');
     }
   },
-  async performSearch({ commit, dispatch }, { query }) {
+  async fetchSearchTips({ commit, dispatch }, { query }) {
     try {
       commit(mutationTypes.SET_PROCESS_STATUS, { isInProcess: true });
 
       await dispatch('setQueryString', { query });
-      const { books, totalItems } = await searchBooks({ query }).then(mapSearchResults);
+      const searchTips = await getSearchTips({ query }).then(mapSearchTips);
 
-      if (books) {
-        commit(mutationTypes.SET_BOOK_LIST, { books });
-        commit(mutationTypes.SET_SEARCH_TIPS, { tips: mapSearchTips(books) });
-        commit(mutationTypes.SET_TOTAL_ITEMS, { totalItems });
-      }
+      commit(mutationTypes.SET_SEARCH_TIPS, { tips: searchTips });
     } catch (e) {
-      console.error(e, 'error while performSearch');
+      console.error(e, 'error while fetchSearchTips');
     } finally {
       commit(mutationTypes.SET_PROCESS_STATUS, { isInProcess: false });
     }
@@ -41,23 +37,47 @@ export default {
   resetQueryString({ commit }) {
     commit(mutationTypes.RESET_QUERY_STRING);
   },
-  chooseBookById({ commit, getters }, { bookId }) {
+  pickBook({ commit, getters }, { bookId }) {
     const chosenBook = mapChosenBook(
-      getters.booksList.filter((book) => bookId === book.id)[0],
+      getters.chosenBookList.filter((book) => bookId === book.id)[0],
     );
-
     commit(mutationTypes.SET_CHOSEN_BOOK_INFO, { book: chosenBook });
   },
-  saveSearchResults({ commit, getters }) {
-    commit(mutationTypes.SET_CHOSEN_BOOK_LIST, {
-      chosenBookList: getters.booksList,
-    });
-    commit(mutationTypes.SET_CHOSEN_QUERY, {
-      chosenQuery: getters.queryString,
-    });
-    commit(mutationTypes.SET_CHOSEN_TOTAL_ITEMS, {
-      chosenTotalItems: getters.totalSearchedItems,
-    });
+  async pickBookFromSearchTips({ dispatch }, { bookId, bookIdx }) {
+    try {
+      await dispatch('fetchChosenBooksList', { startIdx: bookIdx });
+      await dispatch('pickBook', { bookId });
+    } catch (e) {
+      console.error(e, 'error while pickBookFromSearchTips');
+    }
+  },
+  async fetchChosenBooksList({ commit, getters }, { query = '', startIdx = 0 }) {
+    try {
+      // when search field onPressEnter use query from search field,
+      // if clicked on the search tip uses saved query from the app state
+      const querySource = query || getters.queryString;
+
+      if (querySource) {
+        const { books, totalItems } = await fetchBooks({
+          query: querySource,
+          startIdx,
+        }).then(mapSearchResults);
+
+        if (books.length && getters.isNothingFound) {
+          commit(mutationTypes.SET_NOTHING_FOUND_STATUS, { isNothingFound: false });
+        }
+
+        if (!books.length) {
+          commit(mutationTypes.SET_NOTHING_FOUND_STATUS, { isNothingFound: true });
+        }
+
+        commit(mutationTypes.SET_CHOSEN_BOOK_LIST, { chosenBookList: books });
+        commit(mutationTypes.SET_CHOSEN_QUERY, { chosenQuery: querySource });
+        commit(mutationTypes.SET_CHOSEN_TOTAL_ITEMS, { chosenTotalItems: totalItems });
+      }
+    } catch (e) {
+      console.error(e, 'error while fetchChosenBooksList');
+    }
   },
   resetSearchTips({ commit }) {
     commit(mutationTypes.RESET_SEARCH_TIPS);
