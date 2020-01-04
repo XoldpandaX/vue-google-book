@@ -1,9 +1,5 @@
 @import 'src/assets/styles/base/variables';
 
 .container-search {
-
-  &--search-tips-active {
-    border: 1px solid $primary-border-color;
-    border-radius: $primary-border-radius;
-  }
+  position: relative;
 }
