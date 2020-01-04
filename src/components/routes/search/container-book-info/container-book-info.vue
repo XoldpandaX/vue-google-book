@@ -1,5 +1,8 @@
 <template>
-  <book-info :book="chosenBook" />
+  <book-info
+    :book="chosenBook"
+    :is-book-loading="isBookInfoLoading"
+  />
 </template>
 
 <script>
@@ -13,7 +16,7 @@ export default {
     BookInfo,
   },
   computed: {
-    ...mapGetters('library', ['chosenBook']),
+    ...mapGetters('library', ['chosenBook', 'isBookInfoLoading']),
   },
 };
 </script>
