@@ -4,7 +4,10 @@
       v-for="(listItem, idx) in listItems"
       :key="listItem.id + idx"
     >
-      <slot :item="listItem" />
+      <slot
+        :item="listItem"
+        :idx="idx"
+      />
     </li>
   </ul>
 </template>
