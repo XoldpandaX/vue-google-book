@@ -5,8 +5,9 @@
     :type="type"
     :placeholder="placeholder"
     :style="customWidth"
-    @focus="$emit('input', $event.target.value)"
+    @focus="$emit('focus', $event.target.value)"
     @input="$emit('input', $event.target.value)"
+    @keydown.enter="handleEnterPress"
     @keydown.down="handleArrowBtnPress"
     @keydown.up="handleArrowBtnPress"
   >
@@ -23,6 +24,7 @@ export default {
     placeholder: VueTypes.string.def(''),
     width: VueTypes.string.def(''),
     customType: VueTypes.oneOf(['search', '']).def(''),
+    hasHandlerOnEnter: VueTypes.bool.def(false),
   },
   computed: {
     customWidth() {
@@ -43,6 +45,11 @@ export default {
 
         e.preventDefault();
         this.$emit(eventsByKeyCode[code], { key: code });
+      }
+    },
+    handleEnterPress(e) {
+      if (this.hasHandlerOnEnter) {
+        this.$emit('enter-press', e);
       }
     },
   },
