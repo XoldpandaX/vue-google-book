@@ -9,7 +9,7 @@ export function addFavoriteBook() {
   });
 }
 
-export function searchBooks({ query }) {
+export function fetchBooks({ query = '', startIdx = 0, maxResults = 4 }) {
   return request.get('volumes', {
     params: {
       q: query,
@@ -17,6 +17,22 @@ export function searchBooks({ query }) {
       key: FIREBASE_CONFIG.apiKey,
       fields: 'totalItems, items(kind, id, etag, volumeInfo)',
       prettyPrint: false,
+      maxResults,
+      startIndex: startIdx,
+    },
+  });
+}
+
+export function getSearchTips({ query, maxResults = 10 }) {
+  return request.get('volumes', {
+    params: {
+      q: query,
+      printType: 'books',
+      key: FIREBASE_CONFIG.apiKey,
+      fields: 'items(id, volumeInfo/title)',
+      projection: 'lite',
+      prettyPrint: false,
+      maxResults,
     },
   });
 }
