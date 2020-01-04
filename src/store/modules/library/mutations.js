@@ -7,17 +7,11 @@ export default {
   [mutationTypes.RESET_QUERY_STRING](state) {
     state.query = '';
   },
-  [mutationTypes.SET_BOOK_LIST](state, { books }) {
-    state.booksList = books;
-  },
   [mutationTypes.SET_SEARCH_ITEMS_QUANTITY](state, { totalItems }) {
     state.totalSearchedItems = totalItems;
   },
   [mutationTypes.SET_SEARCH_TIPS](state, { tips }) {
     state.searchTips = tips;
-  },
-  [mutationTypes.SET_TOTAL_ITEMS](state, { totalItems }) {
-    state.totalSearchedItems = totalItems;
   },
   [mutationTypes.RESET_SEARCH_TIPS](state) {
     state.searchTips = [];
@@ -36,5 +30,8 @@ export default {
   },
   [mutationTypes.SET_PROCESS_STATUS](state, { isInProcess }) {
     state.isInProcess = isInProcess;
+  },
+  [mutationTypes.SET_NOTHING_FOUND_STATUS](state, { isNothingFound }) {
+    state.isNothingFound = isNothingFound;
   },
 };

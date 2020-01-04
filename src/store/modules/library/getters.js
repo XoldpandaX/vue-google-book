@@ -7,4 +7,5 @@ export default {
   chosenBook: ({ chosenBookInfo }) => chosenBookInfo,
   isSearchTipsExist: (state, { searchTips }) => searchTips.length > 0,
   isSearchPerforming: ({ isInProcess }) => isInProcess,
+  isNothingFound: ({ isNothingFound }) => isNothingFound,
 };
