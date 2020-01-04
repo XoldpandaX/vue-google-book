@@ -5,7 +5,8 @@ export default {
   name: 'app-title',
   props: {
     level: VueTypes.number.isRequired,
-    typeColor: VueTypes.oneOf(['primary', 'secondary', 'tertiary', 'quaternary']),
+    typeColor: VueTypes.oneOf(['primary', 'secondary', 'tertiary', 'quaternary'])
+      .def('primary'),
     customColor: VueTypes.string.def(''),
     customFontSize: VueTypes.number,
   },
