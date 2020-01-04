@@ -1,6 +1,6 @@
 <template>
   <wrapper-template
-    class="book-info"
+    :class="rootClasses"
     :size="{ width: '54%', height: '100%' }"
     :background-image="initBackgroundImage"
     :background-color="mainBackgroundColor"
@@ -56,6 +56,7 @@ export default {
       description: VueTypes.string,
       thumbnail: VueTypes.string,
     }).isRequired,
+    isBookLoading: VueTypes.bool.def(false),
   },
   computed: {
     isBookEmpty() {
@@ -74,6 +75,14 @@ export default {
         authors: this.book.authors,
         year: this.book.publishedYear,
       };
+    },
+    rootClasses() {
+      const base = 'book-info';
+
+      return [
+        base,
+        this.isBookLoading ? `${base}--loading` : null,
+      ];
     },
   },
 };

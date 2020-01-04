@@ -3,6 +3,12 @@
 .book-info {
   position: relative;
   padding: 5%;
+  transition: all .5s ease-out;
+
+  &--loading {
+    filter: blur(3px);
+    opacity: .5;
+  }
 
   &__init-title {
     position: absolute;
