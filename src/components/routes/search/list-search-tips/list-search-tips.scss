@@ -1,10 +1,16 @@
+@import 'src/assets/styles/base/variables';
 @import "~sass-rem/rem";
 
 .list-search-tips {
+  position: absolute;
+  width: 100%;
   margin: 0;
   padding: rem(16px 12px 20px 16px);
   list-style: none;
+  border: 1px solid $primary-border-color;
+  border-radius: 0 0 $primary-border-radius $primary-border-radius;
   border-top: 1px solid #E0E4E7;
+  background-color: $primary-background;
 
   li {
     cursor: pointer;

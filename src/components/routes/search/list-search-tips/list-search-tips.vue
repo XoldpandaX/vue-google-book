@@ -1,10 +1,10 @@
 <template>
   <app-list
     class="list-search-tips"
-    v-slot="{ item }"
+    v-slot="{ item, idx }"
     :list-items="searchTips"
   >
-    <div @click="$emit('click-search-tip', item.id)">
+    <div @click="$emit('click-search-tip', { id: item.id, idx })">
       <app-text
         size-type="primary"
         color-type="secondary"
