@@ -29,10 +29,10 @@ export default {
     size: VueTypes.shape({
       width: VueTypes.number,
       height: VueTypes.number,
-    }).def({
+    }).def(() => ({
       width: 20,
       height: 20,
-    }),
+    })),
   },
   computed: {
     isIconExist() {
