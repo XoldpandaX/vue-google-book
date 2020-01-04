@@ -1,10 +1,18 @@
-import pick from 'lodash.pick';
 import get from 'lodash.get';
+import { cutStringByLength } from '@/utils';
 
 export default function ({ data }) {
   const books = get(data, 'items', null);
 
   if (books) {
+    const combineAuthors = (authorsArr) => (
+      authorsArr.length
+        ? authorsArr.reduce((allAuthors, nextAuthor, idx) => (
+          ` ${allAuthors}${idx > 0 ? ' & ' : ''}${nextAuthor}`
+        ), '')
+        : ''
+    );
+
     return {
       books: (
         books.map(({ id, etag, volumeInfo }) => {
@@ -13,23 +21,19 @@ export default function ({ data }) {
           const averageRating = get(volumeInfo, 'averageRating', '');
           const title = get(volumeInfo, 'title', '');
           const thumbnail = get(volumeInfo, ['imageLinks', 'thumbnail'], '');
+          const description = get(volumeInfo, 'description', '');
 
           return {
-            ...pick(volumeInfo, ['description']),
             id,
             etag,
             thumbnail,
             averageRating,
             title,
-            abbreviatedTitle: title.length > 51 ? `${title.slice(0, 48)}...` : title.slice(0, 51),
+            description: cutStringByLength(description, 897),
+            abbreviatedDescription: cutStringByLength(description, 137),
+            abbreviatedTitle: cutStringByLength(title, 48),
             publishedYear: publishedYear ? ` ${publishedYear.slice(0, 4)}` : '',
-            authors: (
-              authors.length
-                ? authors.reduce((allAuthors, nextAuthor, idx) => (
-                  ` ${allAuthors}${idx > 0 ? ' & ' : ''}${nextAuthor}`
-                ), '')
-                : ''
-            ),
+            authors: combineAuthors(authors),
           };
         })
       ),
@@ -38,7 +42,7 @@ export default function ({ data }) {
   }
 
   return {
-    books: null,
-    totalItems: null,
+    books: [],
+    totalItems: 0,
   };
 }
