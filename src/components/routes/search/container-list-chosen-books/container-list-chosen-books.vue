@@ -2,6 +2,7 @@
   <list-chosen-books
     v-if="!isNothingFound"
     :books="chosenBookList"
+    :is-books-loading="isBooksLoading"
     @list-el-click="handleItemClick"
   />
   <div v-else>nothing found for your search...</div>
@@ -18,7 +19,11 @@ export default {
     ListChosenBooks,
   },
   computed: {
-    ...mapGetters('library', ['chosenBookList', 'isNothingFound']),
+    ...mapGetters('library', [
+      'chosenBookList',
+      'isNothingFound',
+      'isBooksLoading',
+    ]),
   },
   methods: {
     ...mapActions('library', ['pickBook']),

@@ -4,7 +4,7 @@
       v-click-outside="resetSearchTips"
       :value="queryString"
       :is-active="isSearchTipsAvailable"
-      :is-searching="isSearchPerforming"
+      :is-searching="isTipsLoading"
       @search-input="debouncedHandleSearch"
       @search-focus="handleOnFocus"
       @cross-click="handleCrossClick"
@@ -45,7 +45,7 @@ export default {
     ...mapGetters('library', [
       'queryString',
       'searchTips',
-      'isSearchPerforming',
+      'isTipsLoading',
       'isSearchTipsExist',
     ]),
 

@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { request } from '@/utils';
-import { FIREBASE_CONFIG } from '@/constants';
+import { FIREBASE_CONFIG, LIBRARY_CONSTANTS } from '@/constants';
 
 export function addFavoriteBook() {
   return firebase.database().ref('another user').push({
@@ -9,7 +9,11 @@ export function addFavoriteBook() {
   });
 }
 
-export function fetchBooks({ query = '', startIdx = 0, maxResults = 4 }) {
+export function fetchBooks({
+  query = '',
+  startIdx = 0,
+  maxResults = LIBRARY_CONSTANTS.BOOKS_PER_PAGE,
+}) {
   return request.get('volumes', {
     params: {
       q: query,

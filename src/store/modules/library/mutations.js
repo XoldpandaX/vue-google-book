@@ -28,8 +28,14 @@ export default {
   [mutationTypes.SET_CHOSEN_QUERY](state, { chosenQuery }) {
     state.chosenQuery = chosenQuery;
   },
-  [mutationTypes.SET_PROCESS_STATUS](state, { isInProcess }) {
-    state.isInProcess = isInProcess;
+  [mutationTypes.SET_LOADING_TIPS_STATUS](state, { isTipsLoading }) {
+    state.isTipsLoading = isTipsLoading;
+  },
+  [mutationTypes.SET_LOADING_BOOKS_STATUS](state, { isBooksLoading }) {
+    state.isBooksLoading = isBooksLoading;
+  },
+  [mutationTypes.SET_LOADING_BOOK_INFO_STATUS](state, { isBookInfoLoading }) {
+    state.isBookInfoLoading = isBookInfoLoading;
   },
   [mutationTypes.SET_NOTHING_FOUND_STATUS](state, { isNothingFound }) {
     state.isNothingFound = isNothingFound;

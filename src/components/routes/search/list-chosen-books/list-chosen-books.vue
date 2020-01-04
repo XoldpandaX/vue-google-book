@@ -1,6 +1,6 @@
 <template>
   <app-list
-    class="list-chosen-books"
+    :class="rootClasses"
     v-slot="{ item }"
     :list-items="books"
   >
@@ -25,6 +25,17 @@ export default {
   },
   props: {
     books: VueTypes.arrayOf(VueTypes.object),
+    isBooksLoading: VueTypes.bool.def(false),
+  },
+  computed: {
+    rootClasses() {
+      const base = 'list-chosen-books';
+
+      return [
+        base,
+        this.isBooksLoading ? `${base}--loading` : null,
+      ];
+    },
   },
 };
 </script>

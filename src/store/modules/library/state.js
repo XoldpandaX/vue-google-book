@@ -6,6 +6,8 @@ export default {
   chosenBookList: [], // a list of books found when you select a particular book
   chosenBookInfo: {}, // chosen book for displaying
   chosenTotalItems: 0, // chosenBookList entities that can be downloaded in future
-  isInProcess: false,
+  isTipsLoading: false,
+  isBookInfoLoading: false,
+  isBooksLoading: false,
   isNothingFound: false,
 };

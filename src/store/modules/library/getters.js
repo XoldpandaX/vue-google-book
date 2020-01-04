@@ -1,11 +1,12 @@
 export default {
   queryString: ({ query }) => query,
   searchTips: ({ searchTips }) => searchTips,
-  booksList: ({ booksList }) => booksList,
-  totalSearchedItems: ({ totalSearchedItems }) => totalSearchedItems,
+  totalSearchedItems: ({ chosenTotalItems }) => chosenTotalItems,
   chosenBookList: ({ chosenBookList }) => chosenBookList,
   chosenBook: ({ chosenBookInfo }) => chosenBookInfo,
   isSearchTipsExist: (state, { searchTips }) => searchTips.length > 0,
-  isSearchPerforming: ({ isInProcess }) => isInProcess,
+  isTipsLoading: ({ isTipsLoading }) => isTipsLoading,
+  isBooksLoading: ({ isBooksLoading }) => isBooksLoading,
+  isBookInfoLoading: ({ isBookInfoLoading }) => isBookInfoLoading,
   isNothingFound: ({ isNothingFound }) => isNothingFound,
 };
