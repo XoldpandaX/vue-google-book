@@ -16,8 +16,15 @@ export default {
   components: {
     FormAuth,
   },
+  watch: {
+    async isUserLoggedIn(val) {
+      if (val) {
+        await this.$router.push({ name: ROUTES.SEARCH.NAME });
+      }
+    },
+  },
   computed: {
-    ...mapGetters('auth', ['isAuthInProcess']),
+    ...mapGetters('auth', ['isAuthInProcess', 'isUserLoggedIn']),
   },
   methods: {
     ...mapActions('auth', ['signUp', 'signIn']),
@@ -32,7 +39,6 @@ export default {
         email: formFields.email,
         password: formFields.password,
       });
-      await this.$router.push({ name: ROUTES.SEARCH.NAME });
     },
   },
 };
