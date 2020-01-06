@@ -3,7 +3,7 @@
     <div class="search-page__wrapper">
 <!--      <button @click="f">sign out</button>-->
       <container-book-info />
-      <container-main-wrapper />
+      <container-wrapper-main />
     </div>
   </section>
 </template>
@@ -14,13 +14,13 @@ import { mixinWindowHeight } from '@/mixins';
 import { ROUTES } from '@/constants';
 
 import { ContainerBookInfo } from '../container-book-info';
-import { ContainerMainWrapper } from '../container-main-wrapper';
+import { ContainerWrapperMain } from '../container-wrapper-main';
 
 export default {
   name: 'search-page',
   components: {
     ContainerBookInfo,
-    ContainerMainWrapper,
+    ContainerWrapperMain,
   },
   mixins: [mixinWindowHeight],
   computed: {

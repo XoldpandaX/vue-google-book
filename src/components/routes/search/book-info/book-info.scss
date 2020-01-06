@@ -37,6 +37,7 @@
     /deep/ .book-rating {
       display: flex;
       align-items: center;
+      margin-bottom: rem(38px);
 
       /deep/ .app-rating {
         margin: rem(1px 14px 0 0);
@@ -45,6 +46,44 @@
 
     /deep/ &-extra {
       margin-bottom: rem(16px);
+    }
+  }
+
+  &__buttons-row {
+    display: flex;
+    align-items: center;
+    opacity: .4;
+    cursor: pointer;
+    transition: all .5s ease-out;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    /deep/ .app-button {
+      margin-right: rem(10px);
+    }
+  }
+
+  /deep/ &__redirect {
+    text-decoration: underline;
+
+    a {
+      &:link,
+      &:visited,
+      &:hover,
+      &:active {
+        color: inherit;
+      }
+    }
+  }
+
+  &__in-favorite {
+    display: flex;
+    align-items: center;
+
+    /deep/ .app-text {
+      margin-left: rem(10px);
     }
   }
 

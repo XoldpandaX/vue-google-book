@@ -22,28 +22,45 @@ export default {
     ...mapGetters('library', [
       'chosenBookList',
       'isNothingFound',
-      'totalSearchedItems',
+      'chosenTotalPages',
+      'favoriteTotalPages',
       'isBooksLoading',
+      'currentViewMode',
     ]),
 
+    isSearchMode() {
+      return this.currentViewMode === LIBRARY_CONSTANTS.SEARCH_VIEW_MODE;
+    },
+    sourceOfPagesQuantity() {
+      return this.isSearchMode ? this.chosenTotalPages : this.favoriteTotalPages;
+    },
     fakeArr() {
-      return [...Array(this.totalSearchedItems).keys()].map((i) => i);
+      return [...Array(this.sourceOfPagesQuantity).keys()].map((i) => i);
     },
     isPaginationAvailable() {
-      return !this.isNothingFound && this.chosenBookList.length;
+      return !this.isNothingFound && this.sourceOfPagesQuantity;
     },
   },
   methods: {
-    ...mapActions('library', ['fetchChosenBooksList']),
+    ...mapActions('library', ['fetchChosenBooksList', 'setDisplayedFavoriteBooks']),
 
     async handleChange(pageNum) {
-      // index from which google book API return books to us
-      const startIdx = LIBRARY_CONSTANTS.BOOKS_PER_PAGE * pageNum;
+      // index from which google book API or our saved favorite arr data return books to us
+      const { BOOKS_PER_PAGE } = LIBRARY_CONSTANTS;
+      const startIdx = pageNum > 1
+        ? (BOOKS_PER_PAGE * pageNum) - BOOKS_PER_PAGE + 1 // num of next item after max
+        : 0;
 
-      await this.fetchChosenBooksList({
-        isLoadMore: true,
-        startIdx,
-      });
+      if (this.isSearchMode) {
+        await this.fetchChosenBooksList({
+          isLoadMore: true,
+          startIdx,
+        });
+      } else {
+        await this.setDisplayedFavoriteBooks({
+          startIdx,
+        });
+      }
     },
   },
 };
