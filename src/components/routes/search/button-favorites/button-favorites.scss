@@ -3,6 +3,7 @@
 
 .button-favorites {
   @include rem(box-shadow, 0px 16px 17px rgba(0, 0, 0, 0.201427));
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -18,8 +19,38 @@
     background: $secondary-background;
   }
 
+  &__tooltip {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    top: -85%;
+    padding: rem(5px) rem(15px);
+    transition: all .5s ease-out;
+    background-color: $search-tooltip-background;
+    border-radius: $primary-border-radius;
+    color: $tooltip-font-color;
+    font-size: $primary-font-size;
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 0;
+      height: 0;
+      border-width: 6px;
+      border-style: solid;
+      border-color: $search-tooltip-background transparent transparent transparent;
+      top: 27px;
+    }
+  }
+
   /deep/ .app-button {
     width: 100%;
     height: 100%;
   }
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to {
+  opacity: 0;
 }
