@@ -4,8 +4,14 @@
     :size="{ width: '46%', height: '100%' }"
   >
     <div class="wrapper-main__row">
-      <container-favorites />
-      <container-search />
+      <container-favorites-button />
+      <container-search v-if="isSearchMode" />
+      <app-title
+        v-else
+        :level="1"
+      >
+        Favorites
+      </app-title>
     </div>
     <container-list-chosen-books />
     <container-pagination />
@@ -19,8 +25,10 @@
 
 <script>
 import VueTypes from 'vue-types';
+import { LIBRARY_CONSTANTS } from '@/constants';
 
-import { ContainerFavorites } from '../container-favorites';
+import { AppTitle } from '@/components/common/app-title';
+import { ContainerFavoritesButton } from '../container-favorites-button';
 import { ContainerListChosenBooks } from '../container-list-chosen-books';
 import { ContainerPagination } from '../container-pagination';
 import { ContainerSearch } from '../container-search';
@@ -30,7 +38,8 @@ import { WrapperTemplate } from '@/components/common/wrapper-template';
 export default {
   name: 'wrapper-main',
   components: {
-    ContainerFavorites,
+    AppTitle,
+    ContainerFavoritesButton,
     ContainerListChosenBooks,
     ContainerPagination,
     ContainerSearch,
@@ -39,6 +48,15 @@ export default {
   },
   props: {
     isBooksLoading: VueTypes.bool.def(false),
+    viewMode: VueTypes.oneOf([
+      LIBRARY_CONSTANTS.FAVORITES_VIEW_MODE,
+      LIBRARY_CONSTANTS.SEARCH_VIEW_MODE,
+    ]).isRequired,
+  },
+  computed: {
+    isSearchMode() {
+      return this.viewMode === LIBRARY_CONSTANTS.SEARCH_VIEW_MODE;
+    },
   },
 };
 </script>
