@@ -8,7 +8,7 @@ export default {
     state.query = '';
   },
   [mutationTypes.SET_SEARCH_ITEMS_QUANTITY](state, { totalItems }) {
-    state.totalSearchedItems = totalItems;
+    state.chosenTotalPages = totalItems;
   },
   [mutationTypes.SET_SEARCH_TIPS](state, { tips }) {
     state.searchTips = tips;
@@ -22,8 +22,8 @@ export default {
   [mutationTypes.SET_CHOSEN_BOOK_LIST](state, { chosenBookList }) {
     state.chosenBookList = chosenBookList;
   },
-  [mutationTypes.SET_CHOSEN_TOTAL_ITEMS](state, { chosenTotalItems }) {
-    state.chosenTotalItems = chosenTotalItems;
+  [mutationTypes.SET_CHOSEN_TOTAL_ITEMS](state, { chosenTotalPages }) {
+    state.chosenTotalPages = chosenTotalPages;
   },
   [mutationTypes.SET_CHOSEN_QUERY](state, { chosenQuery }) {
     state.chosenQuery = chosenQuery;
@@ -39,5 +39,27 @@ export default {
   },
   [mutationTypes.SET_NOTHING_FOUND_STATUS](state, { isNothingFound }) {
     state.isNothingFound = isNothingFound;
+  },
+  [mutationTypes.SET_VIEW_MODE](state, { viewMode }) {
+    state.currentViewMode = viewMode;
+  },
+  [mutationTypes.RESET_CHOSEN_BOOK_INFO](state) {
+    state.chosenBookInfo = {};
+  },
+  // favorite books
+  [mutationTypes.SET_FAVORITE_BOOK_LIST](state, { favoriteBookList }) {
+    state.favoriteBookList = favoriteBookList;
+  },
+  [mutationTypes.SET_FAVORITE_BOOK_LIST_DISPLAYED](state, { displayedBooks }) {
+    state.favoriteBookListDisplayed = displayedBooks;
+  },
+  [mutationTypes.UPDATE_FAVORITE_BOOK_LIST](state, { selectedBook }) {
+    state.favoriteBookList = [
+      selectedBook,
+      ...state.favoriteBookList,
+    ];
+  },
+  [mutationTypes.SET_FAVORITE_TOTAL_PAGES](state, { favoriteTotalPages }) {
+    state.favoriteTotalPages = favoriteTotalPages;
   },
 };

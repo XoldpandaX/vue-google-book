@@ -2,11 +2,12 @@ import firebase from 'firebase';
 import { request } from '@/utils';
 import { FIREBASE_CONFIG, LIBRARY_CONSTANTS } from '@/constants';
 
-export function addFavoriteBook() {
-  return firebase.database().ref('another user').push({
-    name: 'another one',
-    surname: 'curshavel',
-  });
+export function getAllFavoritesBooks({ userId }) {
+  return firebase.firestore().collection(`${userId}`).get();
+}
+
+export function addBookToFavorite({ userId, selectedBook = {} }) {
+  return firebase.firestore().collection(`${userId}`).add(selectedBook);
 }
 
 export function fetchBooks({

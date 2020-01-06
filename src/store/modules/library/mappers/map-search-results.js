@@ -22,6 +22,7 @@ export default function ({ data }) {
           const title = get(volumeInfo, 'title', '');
           const thumbnail = get(volumeInfo, ['imageLinks', 'thumbnail'], '');
           const description = get(volumeInfo, 'description', '');
+          const link = get(volumeInfo, 'infoLink', '');
 
           return {
             id,
@@ -34,6 +35,8 @@ export default function ({ data }) {
             abbreviatedTitle: cutStringByLength(title, 48),
             publishedYear: publishedYear ? ` ${publishedYear.slice(0, 4)}` : '',
             authors: combineAuthors(authors),
+            isInFavorite: false,
+            link,
           };
         })
       ),

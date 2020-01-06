@@ -20,6 +20,7 @@ export default {
       commit(mutationTypes.SET_PROCESS_STATUS, { isInProcess: true });
 
       const { user } = await signInUser({ email, password });
+      await dispatch('library/fetchAllUserFavoriteBooks', { userId: user.uid }, { root: true });
       await dispatch('saveUser', user);
     } catch (e) {
       console.error(e, 'error while signIn');
