@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import infiniteScroll from 'vue-infinite-scroll';
 import * as firebase from 'firebase';
 import createRouter from './router';
 import createStore from '@/store';
@@ -14,6 +15,7 @@ let app;
 const store = createStore();
 const router = createRouter(store);
 settingUpVeeValidate();
+Vue.use(infiniteScroll);
 
 Vue.directive('click-outside', clickOutside);
 

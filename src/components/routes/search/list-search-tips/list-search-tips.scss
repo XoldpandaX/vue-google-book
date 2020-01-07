@@ -17,6 +17,10 @@
 
     &:not(:last-child) {
       margin-bottom: rem(20px);
+
+      @media (max-width: $tablet) {
+        margin-bottom: rem(10px);
+      }
     }
 
     &:hover {

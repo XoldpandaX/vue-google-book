@@ -28,10 +28,7 @@ export default {
   },
   async addBookToFavorite({ commit, getters, rootGetters }, { selectedBook }) {
     try {
-      const updatedSelection = {
-        ...selectedBook,
-        isInFavorite: true,
-      };
+      const updatedSelection = { ...selectedBook, isInFavorite: true };
 
       await addBookToFavorite({
         userId: rootGetters['auth/userId'],
@@ -50,9 +47,19 @@ export default {
       console.error(e, 'error while addBookToFavorite');
     }
   },
-  changeViewMode({ commit, getters, dispatch }, { viewMode }) {
+  async changeViewMode({
+    commit,
+    getters,
+    rootGetters,
+    dispatch,
+  }, { viewMode }) {
     if (viewMode === LIBRARY_CONSTANTS.FAVORITES_VIEW_MODE && getters.favoriteBookList.length) {
-      dispatch('setDisplayedFavoriteBooks', { startIdx: 0 });
+      await dispatch(
+        !rootGetters['ui/isSmallScreens']
+          ? 'setDisplayedFavoriteBooks'
+          : 'mobileSetDisplayedFavoriteBooks',
+        { startIdx: 0 },
+      );
     }
 
     if (!isEmpty(getters.chosenBook)) {
@@ -88,6 +95,16 @@ export default {
       });
     }
   },
+  // for mobile endless scroll
+  mobileSetDisplayedFavoriteBooks({ commit, getters }, { startIdx } = {}) {
+    if (getters.favoriteBookListDisplayed !== getters.favoriteBookList.length) {
+      commit(mutationTypes.CONCAT_FAVORITE_BOOK_LIST_DISPLAYED, {
+        favoriteBooks: getters.favoriteBookList.slice(
+          startIdx, startIdx + LIBRARY_CONSTANTS.BOOKS_PER_PAGE_MOBILE,
+        ),
+      });
+    }
+  },
   async fetchSearchTips({ commit, dispatch }, { query }) {
     try {
       commit(mutationTypes.SET_LOADING_TIPS_STATUS, { isTipsLoading: true });
@@ -108,7 +125,12 @@ export default {
   resetQueryString({ commit }) {
     commit(mutationTypes.RESET_QUERY_STRING);
   },
-  async pickBook({ commit, getters }, { bookId }) {
+  async pickBook({
+    commit,
+    getters,
+    rootGetters,
+    dispatch,
+  }, { bookId }) {
     try {
       commit(mutationTypes.SET_LOADING_BOOK_INFO_STATUS, { isBookInfoLoading: true });
       await waitFor(500);
@@ -133,6 +155,11 @@ export default {
     } catch (e) {
       console.error(e, 'error while pickBook');
     } finally {
+      // only for mobiles: say that now we can show book info
+      if (rootGetters['ui/isSmallScreens']) {
+        dispatch('changeChosenBookVisibility', { isBookPicked: true });
+      }
+
       commit(mutationTypes.SET_LOADING_BOOK_INFO_STATUS, { isBookInfoLoading: false });
     }
   },
@@ -144,11 +171,28 @@ export default {
       console.error(e, 'error while pickBookFromSearchTips');
     }
   },
-  async fetchChosenBooksList({ commit, getters }, { isLoadMore = false, query = '', startIdx = 0 }) {
+  async fetchChosenBooksList({
+    commit,
+    getters,
+    rootGetters,
+    dispatch,
+  }, {
+    isLoadMore = false,
+    isConcat = false,
+    query = '',
+    startIdx = 0,
+  }) {
     try {
       // when search field onPressEnter use query from search field,
       // if clicked on the search tip uses saved query from the app state
       const querySource = query || getters.queryString;
+      const booksPerPage = rootGetters['ui/isDesktopWidth']
+        ? LIBRARY_CONSTANTS.BOOKS_PER_PAGE
+        : LIBRARY_CONSTANTS.BOOKS_PER_PAGE_MOBILE;
+
+      // only for mobiles: say that now we can't show list of books
+      // because we have chosen book from tip list and have to show book screen
+      await dispatch('handleSmallScreenBooks', { query, isConcat });
 
       if (querySource) {
         commit(mutationTypes.SET_LOADING_BOOKS_STATUS, { isBooksLoading: true });
@@ -156,28 +200,49 @@ export default {
         const { books, totalItems } = await fetchBooks({
           query: querySource,
           startIdx,
+          maxResults: booksPerPage,
         }).then(mapSearchResults);
 
-        if (books.length && getters.isNothingFound) {
-          commit(mutationTypes.SET_NOTHING_FOUND_STATUS, { isNothingFound: false });
-        }
-
-        if (!books.length) {
-          commit(mutationTypes.SET_NOTHING_FOUND_STATUS, { isNothingFound: true });
-        }
+        await dispatch('handleLackOfBooks', { loadedBooks: books });
 
         if (!isLoadMore) {
           commit(mutationTypes.SET_CHOSEN_QUERY, { chosenQuery: querySource });
           commit(mutationTypes.SET_CHOSEN_TOTAL_ITEMS, { chosenTotalPages: totalItems });
         }
 
-        commit(mutationTypes.SET_CHOSEN_BOOK_LIST, { chosenBookList: books });
+        if (!isConcat) {
+          commit(mutationTypes.SET_CHOSEN_BOOK_LIST, { chosenBookList: books });
+        } else {
+          commit(mutationTypes.CONCAT_CHOSEN_BOOK_LIST, { chosenBookList: books });
+        }
       }
     } catch (e) {
       console.error(e, 'error while fetchChosenBooksList');
     } finally {
       commit(mutationTypes.SET_LOADING_BOOKS_STATUS, { isBooksLoading: false });
     }
+  },
+  // part of fetchChosenBooksList action
+  async handleSmallScreenBooks({ rootGetters, dispatch }, { query, isConcat }) {
+    if (rootGetters['ui/isSmallScreens'] && !query && !isConcat) {
+      await dispatch('changeBooksListVisibility', { isListVisible: false });
+    }
+  },
+  // part of fetchChosenBooksList action
+  handleLackOfBooks({ commit, getters }, { loadedBooks }) {
+    if (!loadedBooks.length) {
+      commit(mutationTypes.SET_NOTHING_FOUND_STATUS, { isNothingFound: true });
+    }
+
+    if (loadedBooks.length && getters.isNothingFound) {
+      commit(mutationTypes.SET_NOTHING_FOUND_STATUS, { isNothingFound: false });
+    }
+  },
+  changeBooksListVisibility({ commit }, { isListVisible }) {
+    commit(mutationTypes.CHANGE_CHOSEN_BOOK_LIST_VISIBILITY, { isListVisible });
+  },
+  changeChosenBookVisibility({ commit }, { isBookPicked }) {
+    commit(mutationTypes.CHANGE_CHOSEN_BOOK_VISIBILITY, { isBookPicked });
   },
   resetSearchTips({ commit }) {
     commit(mutationTypes.RESET_SEARCH_TIPS);

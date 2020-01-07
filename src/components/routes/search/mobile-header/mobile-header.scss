@@ -1,0 +1,36 @@
+@import "~sass-rem/rem";
+@import 'src/assets/styles/base/variables';
+
+.mobile-header {
+  $_this: &;
+
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: rem(14px) rem(20px);
+
+  &__return-btn {
+    opacity: 1;
+    color: white;
+  }
+
+  &__author-names {
+    font-weight: bold;
+  }
+
+  &--favorites {
+    background: $secondary-background;
+
+    #{$_this}__return-btn {
+      margin-right: rem(16px);
+    }
+  }
+
+  &--books {
+    justify-content: space-between;
+    background: rgba(0,0,0,.7);
+  }
+}

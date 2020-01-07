@@ -22,6 +22,12 @@ export default {
   [mutationTypes.SET_CHOSEN_BOOK_LIST](state, { chosenBookList }) {
     state.chosenBookList = chosenBookList;
   },
+  [mutationTypes.CONCAT_CHOSEN_BOOK_LIST](state, { chosenBookList }) {
+    state.chosenBookList = [
+      ...state.chosenBookList,
+      ...chosenBookList,
+    ];
+  },
   [mutationTypes.SET_CHOSEN_TOTAL_ITEMS](state, { chosenTotalPages }) {
     state.chosenTotalPages = chosenTotalPages;
   },
@@ -36,6 +42,12 @@ export default {
   },
   [mutationTypes.SET_LOADING_BOOK_INFO_STATUS](state, { isBookInfoLoading }) {
     state.isBookInfoLoading = isBookInfoLoading;
+  },
+  [mutationTypes.CHANGE_CHOSEN_BOOK_VISIBILITY](state, { isBookPicked }) {
+    state.isBookWasChosen = isBookPicked;
+  },
+  [mutationTypes.CHANGE_CHOSEN_BOOK_LIST_VISIBILITY](state, { isListVisible }) {
+    state.isBookListAvailable = isListVisible;
   },
   [mutationTypes.SET_NOTHING_FOUND_STATUS](state, { isNothingFound }) {
     state.isNothingFound = isNothingFound;
@@ -52,6 +64,12 @@ export default {
   },
   [mutationTypes.SET_FAVORITE_BOOK_LIST_DISPLAYED](state, { displayedBooks }) {
     state.favoriteBookListDisplayed = displayedBooks;
+  },
+  [mutationTypes.CONCAT_FAVORITE_BOOK_LIST_DISPLAYED](state, { favoriteBooks }) {
+    state.favoriteBookListDisplayed = [
+      ...state.favoriteBookListDisplayed,
+      ...favoriteBooks,
+    ];
   },
   [mutationTypes.UPDATE_FAVORITE_BOOK_LIST](state, { selectedBook }) {
     state.favoriteBookList = [

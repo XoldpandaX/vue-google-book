@@ -27,6 +27,7 @@ export default {
       'isBooksLoading',
       'currentViewMode',
     ]),
+    ...mapGetters('ui', ['isDesktopWidth']),
 
     isSearchMode() {
       return this.currentViewMode === LIBRARY_CONSTANTS.SEARCH_VIEW_MODE;
@@ -38,7 +39,7 @@ export default {
       return [...Array(this.sourceOfPagesQuantity).keys()].map((i) => i);
     },
     isPaginationAvailable() {
-      return !this.isNothingFound && this.sourceOfPagesQuantity;
+      return !this.isNothingFound && this.sourceOfPagesQuantity && this.isDesktopWidth;
     },
   },
   methods: {

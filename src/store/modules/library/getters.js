@@ -13,4 +13,6 @@ export default {
   isBooksLoading: ({ isBooksLoading }) => isBooksLoading,
   isBookInfoLoading: ({ isBookInfoLoading }) => isBookInfoLoading,
   isNothingFound: ({ isNothingFound }) => isNothingFound,
+  isBookWasChosen: ({ isBookWasChosen }) => isBookWasChosen,
+  isBookListAvailable: ({ isBookListAvailable }) => isBookListAvailable,
 };

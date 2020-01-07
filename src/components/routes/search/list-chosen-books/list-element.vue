@@ -5,6 +5,7 @@
   >
     <div class="list-element__cover">
       <app-image
+        v-if="isDesktopWidth"
         alt="book cover"
         :src="item.thumbnail"
         :size="{ width: 74, height: 101 }"
@@ -41,6 +42,7 @@ export default {
   },
   props: {
     item: VueTypes.object.isRequired,
+    isDesktopWidth: VueTypes.bool.isRequired,
   },
 };
 </script>

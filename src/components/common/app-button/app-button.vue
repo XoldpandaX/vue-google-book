@@ -14,7 +14,13 @@ import VueTypes from 'vue-types';
 export default {
   name: 'app-button',
   props: {
-    type: VueTypes.oneOf(['primary', 'secondary', 'with-icon', 'switch']).isRequired,
+    type: VueTypes.oneOf([
+      'primary',
+      'secondary',
+      'with-icon',
+      'switch',
+      'fetch-more',
+    ]).isRequired,
     size: VueTypes.oneOf(['small', 'medium']).def('small'),
     isEnable: VueTypes.bool.def(true),
     attrType: VueTypes.oneOf(['submit', 'reset', 'button', 'menu']).def('button'),

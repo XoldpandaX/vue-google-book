@@ -15,4 +15,7 @@ export default {
   isBookInfoLoading: false,
   isBooksLoading: false,
   isNothingFound: false,
+
+  isBookWasChosen: false, // only for mobile devices: to know does click on the book was performed
+  isBookListAvailable: true, // only for mobile devices: to know does it needs to hide chosen books list
 };

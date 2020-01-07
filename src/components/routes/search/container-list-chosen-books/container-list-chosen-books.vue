@@ -3,8 +3,10 @@
     v-if="!isNothingFound"
     :books="sourceOfBookList"
     :is-books-loading="isBooksLoading"
+    :is-desktop-width="isDesktopWidth"
     @list-el-click="handleItemClick"
-  />
+    @list-scroll="handleScroll"
+  /> <!-- SCROLL event will emit ONLY on mobile devices -->
   <app-text v-else>'nothing found for your search...'</app-text>
 </template>
 
@@ -29,6 +31,7 @@ export default {
       'isBooksLoading',
       'currentViewMode',
     ]),
+    ...mapGetters('ui', ['isDesktopWidth']),
 
     isSearchMode() {
       return this.currentViewMode === LIBRARY_CONSTANTS.SEARCH_VIEW_MODE;
@@ -38,10 +41,27 @@ export default {
     },
   },
   methods: {
-    ...mapActions('library', ['pickBook']),
+    ...mapActions('library', [
+      'pickBook',
+      'fetchChosenBooksList',
+      'mobileSetDisplayedFavoriteBooks',
+    ]),
 
     async handleItemClick(bookId) {
       await this.pickBook({ bookId });
+    },
+    async handleScroll() {
+      if (this.isSearchMode) {
+        await this.fetchChosenBooksList({
+          isLoadMore: true,
+          isConcat: true,
+          startIdx: this.chosenBookList.length + 1,
+        });
+      } else {
+        await this.mobileSetDisplayedFavoriteBooks({
+          startIdx: this.favoriteBookListDisplayed.length + 1,
+        });
+      }
     },
   },
 };

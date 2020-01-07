@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 import { request } from '@/utils';
-import { FIREBASE_CONFIG, LIBRARY_CONSTANTS } from '@/constants';
+import { FIREBASE_CONFIG } from '@/constants';
 
 export function getAllFavoritesBooks({ userId }) {
   return firebase.firestore().collection(`${userId}`).get();
@@ -13,7 +13,7 @@ export function addBookToFavorite({ userId, selectedBook = {} }) {
 export function fetchBooks({
   query = '',
   startIdx = 0,
-  maxResults = LIBRARY_CONSTANTS.BOOKS_PER_PAGE,
+  maxResults,
 }) {
   return request.get('volumes', {
     params: {

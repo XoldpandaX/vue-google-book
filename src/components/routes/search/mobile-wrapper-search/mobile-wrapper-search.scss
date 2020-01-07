@@ -1,0 +1,22 @@
+@import "~sass-rem/rem";
+@import 'src/assets/styles/base/variables';
+
+.wrapper-mobile {
+  padding: rem(12px);
+
+  &__action-row {
+    position: sticky;
+    top: rem(20px);
+    display: flex;
+    justify-content: center;
+    margin-bottom: rem(32px);
+  }
+
+  /deep/ .button-favorites {
+    margin-right: rem(12px);
+  }
+
+  /deep/ .container-search {
+    flex: 1;
+  }
+}

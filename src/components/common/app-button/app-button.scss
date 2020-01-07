@@ -71,6 +71,14 @@
     text-transform: none;
   }
 
+  &--fetch-more {
+    min-height: unset;
+    padding: 5px 10px;
+    color: white;
+    text-transform: capitalize;
+    background-color: $secondary-btn-background;
+  }
+
   &--disable {
     cursor: not-allowed;
     opacity: .7;

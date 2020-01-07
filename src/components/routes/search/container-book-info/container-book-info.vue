@@ -3,6 +3,7 @@
     :book="chosenBook"
     :is-book-loading="isBookInfoLoading"
     :current-view-mode="currentViewMode"
+    :is-small-screens="isSmallScreens"
     @add-to-favorite="handleAddToFavorite"
   />
 </template>
@@ -24,6 +25,7 @@ export default {
       'isBookInfoLoading',
       'currentViewMode',
     ]),
+    ...mapGetters('ui', ['isSmallScreens']),
 
     isSearchMode() {
       return this.currentViewMode === LIBRARY_CONSTANTS.SEARCH_VIEW_MODE;

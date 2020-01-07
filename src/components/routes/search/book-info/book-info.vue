@@ -1,11 +1,11 @@
 <template>
   <wrapper-template
     :class="rootClasses"
-    :size="{ width: '54%', height: '100%' }"
+    :size="sizes"
     :background-image="initBackgroundImage"
     :background-color="mainBackgroundColor"
   >
-    <init-title v-if="isBookEmpty">Library</init-title> <!-- first default render -->
+    <init-title v-if="isTitleAvailable">Library</init-title> <!-- first default render -->
 
     <template v-else> <!-- main info of picked book -->
       <div class="book-info__inner">
@@ -84,6 +84,7 @@ export default {
       LIBRARY_CONSTANTS.SEARCH_VIEW_MODE,
       LIBRARY_CONSTANTS.FAVORITES_VIEW_MODE,
     ]),
+    isSmallScreens: VueTypes.bool.def(false),
   },
   data() {
     return {
@@ -99,6 +100,9 @@ export default {
     isBookEmpty() {
       return isEmpty(this.book);
     },
+    isTitleAvailable() {
+      return this.isBookEmpty && !this.isSmallScreens;
+    },
     isSearchMode() {
       return this.currentViewMode === LIBRARY_CONSTANTS.SEARCH_VIEW_MODE;
     },
@@ -109,7 +113,17 @@ export default {
       return this.isBookEmpty ? backgroundImage : '';
     },
     mainBackgroundColor() {
-      return !this.isBookEmpty ? '#F3F3F3' : '';
+      if (!this.isSmallScreens) {
+        return !this.isBookEmpty ? '#F3F3F3' : '';
+      }
+
+      return 'white';
+    },
+    sizes() {
+      return {
+        width: this.isSmallScreens ? '100%' : '54%',
+        height: 'auto',
+      };
     },
     bookDescription() {
       return {

@@ -13,6 +13,10 @@
   border-radius: $primary-border-radius;
   cursor: pointer;
 
+  @media (max-width: $tablet) {
+    background: $primary-background;
+  }
+
   &--favorites {
     border: none;
     border-radius: 100%;
@@ -39,7 +43,7 @@
       border-width: 6px;
       border-style: solid;
       border-color: $search-tooltip-background transparent transparent transparent;
-      top: 27px;
+      top: rem(27.1px);
     }
   }
 

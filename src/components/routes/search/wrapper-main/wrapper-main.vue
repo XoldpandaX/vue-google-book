@@ -1,17 +1,12 @@
 <template>
   <wrapper-template
     class="wrapper-main"
-    :size="{ width: '46%', height: '100%' }"
+    :size="{ width: '46%', height: '' }"
   >
     <div class="wrapper-main__row">
       <container-favorites-button />
       <container-search v-if="isSearchMode" />
-      <app-title
-        v-else
-        :level="1"
-      >
-        Favorites
-      </app-title>
+      <app-title v-else :level="1">Favorites</app-title>
     </div>
     <container-list-chosen-books />
     <container-pagination />

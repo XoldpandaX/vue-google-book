@@ -9,6 +9,32 @@ $common-indent: 3.5%;
   margin: 0;
   padding: 0;
 
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  @media (max-width: $desktop-medium) {
+    max-height: 550px;
+    min-height: 550px;
+    overflow-y: auto;
+  }
+
+  @media (max-width: $tablet) {
+    margin-top: rem(45px);
+  }
+
   /deep/ li {
     padding-bottom: $common-indent;
     border-bottom: 1px solid $secondary-border-color;
@@ -24,6 +50,10 @@ $common-indent: 3.5%;
 
     &__cover {
       margin-right: $common-indent;
+
+      @media (max-width: $desktop-medium) {
+        margin-right: 0;
+      }
     }
 
     &__main-info {

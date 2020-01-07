@@ -1,6 +1,6 @@
 <template>
   <app-button
-    type="primary"
+    :type="type"
     size="small"
     :attr-type="attrType"
     :is-enable="isEnable"
@@ -30,6 +30,13 @@ export default {
   props: {
     isEnable: VueTypes.bool.def(true),
     attrType: VueTypes.string.def('button'),
+    type: VueTypes.oneOf([
+      'primary',
+      'secondary',
+      'with-icon',
+      'switch',
+      'fetch-more',
+    ]).def('primary'),
   },
 };
 </script>

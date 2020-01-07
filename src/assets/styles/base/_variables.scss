@@ -49,6 +49,12 @@ $h2-font-size: rem(19px);
 $h3-font-size: $tertiary-font-size;
 
 
+// ----------------- breakpoints
+$mobile: 480px;
+$tablet: 768px;
+$desktop-medium: 1124px;
+
+
 // ---------------- different sizes
 $primary-border-radius: rem(4px);
 $primary-border-color: $gray;

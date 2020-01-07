@@ -1,1 +1,1 @@
-export { default as mixinWindowHeight } from './window-height';
+export { default as mixinWindowResize } from './window-resize';
