@@ -51,7 +51,7 @@ export default {
     loadMore() {
       if (this.books.length && !this.isDesktopWidth) {
         this.busy = true;
-        console.info('sdf');
+
         if (!this.isBooksLoading) {
           this.busy = false;
           this.$emit('list-scroll');
