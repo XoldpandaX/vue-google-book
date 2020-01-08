@@ -5,7 +5,6 @@
     @shortkey="quitFromApp"
   >
     <div class="search-page__wrapper">
-<!--      <button @click="f">sign out</button>-->
       <template v-if="!isSmallScreens"> <!-- desktop version -->
         <container-book-info />
         <container-wrapper-main />
