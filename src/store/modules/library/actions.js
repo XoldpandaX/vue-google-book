@@ -207,7 +207,9 @@ export default {
 
         if (!isLoadMore) {
           commit(mutationTypes.SET_CHOSEN_QUERY, { chosenQuery: querySource });
-          commit(mutationTypes.SET_CHOSEN_TOTAL_ITEMS, { chosenTotalPages: totalItems });
+          commit(mutationTypes.SET_CHOSEN_TOTAL_ITEMS, {
+            chosenTotalPages: Math.ceil(totalItems / booksPerPage),
+          });
         }
 
         if (!isConcat) {

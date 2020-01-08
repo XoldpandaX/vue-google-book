@@ -58,9 +58,7 @@ export default {
           startIdx,
         });
       } else {
-        await this.setDisplayedFavoriteBooks({
-          startIdx,
-        });
+        await this.setDisplayedFavoriteBooks({ startIdx });
       }
     },
   },

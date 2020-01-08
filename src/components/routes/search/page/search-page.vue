@@ -1,5 +1,9 @@
 <template>
-  <section :class="rootClasses">
+  <section
+    :class="rootClasses"
+    v-shortkey="['ctrl', 'q']"
+    @shortkey="quitFromApp"
+  >
     <div class="search-page__wrapper">
 <!--      <button @click="f">sign out</button>-->
       <template v-if="!isSmallScreens"> <!-- desktop version -->
@@ -24,7 +28,7 @@
 <script>
 import { mapGetters, mapActions } from 'vuex';
 import { mixinWindowResize } from '@/mixins';
-import { ROUTES, LIBRARY_CONSTANTS } from '@/constants';
+import { LIBRARY_CONSTANTS } from '@/constants';
 
 import { ContainerBookInfo } from '../container-book-info';
 import { ContainerMobileWrapperSearch } from '../container-mobile-wrapper-search';
@@ -78,9 +82,10 @@ export default {
     ...mapActions('auth', ['signOut']),
     ...mapActions('ui', ['changeWindowWidth']),
 
-    async f() {
+    async quitFromApp() {
       await this.signOut();
-      await this.$router.push({ name: ROUTES.HOME.NAME });
+      // reload page(redirect to home & destroy all state data)
+      document.location.reload(true);
     },
   },
 };

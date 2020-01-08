@@ -1,11 +1,10 @@
 import Vue from 'vue';
-import infiniteScroll from 'vue-infinite-scroll';
 import * as firebase from 'firebase';
 import createRouter from './router';
 import createStore from '@/store';
 import { FIREBASE_CONFIG } from './constants';
 import { clickOutside } from './derectives';
-import { settingUpVeeValidate } from './plugins';
+import { settingUpVeeValidate, installInfiniteScroll, installVueShortKey } from './plugins';
 
 import { App } from './components/app';
 
@@ -14,8 +13,10 @@ Vue.config.productionTip = false;
 let app;
 const store = createStore();
 const router = createRouter(store);
+
 settingUpVeeValidate();
-Vue.use(infiniteScroll);
+installInfiniteScroll();
+installVueShortKey();
 
 Vue.directive('click-outside', clickOutside);
 
