@@ -2,6 +2,11 @@
 
 ## Project setup
 ```
+To LOGOUT press key combination ctrl + q(works only in desktop mode) !!!!!!!!
+```
+
+## Project setup
+```
 yarn install
 ```
 
