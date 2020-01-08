@@ -1,6 +1,6 @@
 # app-google-books
 
-## Project setup
+## ATTENTION !!!
 ```
 To LOGOUT press key combination ctrl + q(works only in desktop mode) !!!!!!!!
 ```
